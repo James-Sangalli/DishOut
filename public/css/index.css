@@ -9,15 +9,19 @@ body {
 }
 
 #blackNav {
-  padding-bottom: 80px;
+  padding-bottom: 75px;
   background: black;
 }
 
-#blackNav {
-  padding-bottom: 80px;
+#blackNav2 {
+  padding-bottom: 75px;
   background: black;
 }
 
+#blackNav3 {
+  padding-bottom: 75px;
+  background: black;
+}
 
 html {
     width: 100%;
