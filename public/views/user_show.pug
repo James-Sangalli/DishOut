@@ -1,58 +1,64 @@
 extends layout
 
 block content
-  body
-    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
-    .container
-        //- Brand and toggle get grouped for better mobile display
-        .navbar-header
-          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand(href='#') Start Bootstrap
-        //- Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li
-              a(href='#') About
-            li
-              a(href='#') Services
-            li
-              a(href='#') Contact
-        //- /.navbar-collapse
-        //- /.container
+  body#page-top(data-spy='scroll', data-target='.navbar-fixed-top')
+    .row
+      #blackNav2.col-md-12
+      nav.navbar.navbar-custom.navbar-fixed-top(role='navigation')
+        .container
+          .navbar-header
+            button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-main-collapse')
+              i.fa.fa-bars
+            |                 
+            a.navbar-brand.page-scroll(href='#page-top')
+              i.fa.fa-play-circle
+              |   
+              span.light DishOut
+              |  
+          // Collect the nav links, forms, and other content for toggling
+          .collapse.navbar-collapse.navbar-right.navbar-main-collapse
+            ul.nav.navbar-nav
+              // Hidden li included to remove active class from about link when scrolled up past about section
+              li.hidden
+                a(href='#page-top')
+              |                     
+              li
+                a.page-scroll(href='#home') Home
+              |                     
+              li
+                a.page-scroll(href='#signout') Sign Out
 
-    .title
-      h1 User Homepage
-    .userDetails
-      .name
-        name Name: #{user.name}
-      .email
-        email Email: #{user.email}
-      .submitButton
-        form(method="get" action="/event/new")
-          input(type='submit', value='Create Event')
+  .container
+    .row
+      .col-md-8.col-md-offset-2
+        h1 My Dashboard
+        .userDetails
+          .name
+            name Name: #{user.name}
+          .email
+            email Email: #{user.email}
+          .submitButton
+            form(method="get" action="/event/new")
+              input(type='submit', value='Create Event')
 
-    .eventsHosting
-      .subtitle
-        h3 Events you are Hosting:
-      if hostedEvents.length
-        each event in hostedEvents
-          .event
-            a(href='/event/' + event.id) #{event.name} #{event.date} #{event.time}
-      else
-        .noEvents
-          p You're not hosting any events
+        .eventsHosting
+          .subtitle
+            h3 Events you are Hosting:
+          if hostedEvents.length
+            each event in hostedEvents
+              .event
+                a(href='/event/' + event.id) #{event.name} #{event.date} #{event.time}
+          else
+            .noEvents
+              p You're not hosting any events
 
-    .eventsGuesting
-      .subtitle
-        h3 Events you are Invited to:
-      if guestedEvents.length
-        each event in guestedEvents
-          .event
-            a(href='/event/' + event.id) #{event.name} #{event.date} #{event.time}
-      else
-        .noEvents
-          p You're not invited to any events
+        .eventsGuesting
+          .subtitle
+            h3 Events you are Invited to:
+          if guestedEvents.length
+            each event in guestedEvents
+              .event
+                a(href='/event/' + event.id) #{event.name} #{event.date} #{event.time}
+          else
+            .noEvents
+              p You're not invited to any events
