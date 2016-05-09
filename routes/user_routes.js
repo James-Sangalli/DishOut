@@ -6,7 +6,7 @@ var Event = require("../db/events")
 // Users Homepage
 router.get('/:id', function(req, res) {
   console.log('### GET /user/:id', req.session.userId)
-
+  req.session.userId = 4
   User.getUserById(req.session.userId,
     (err, user) => {
       if (err) {

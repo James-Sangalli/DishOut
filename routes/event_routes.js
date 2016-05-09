@@ -86,7 +86,7 @@ router.get('/:id/addinfo', function(req, res){
 })
 
 // View event page
-router.get('/:id', function(req, res){
+router.get('/:id', (req, res) => {
   console.log('### GET /event/:id')
 
   Event.getEventById(req.params.id,
@@ -97,27 +97,18 @@ router.get('/:id', function(req, res){
         return
       }
       console.log('Successfully got event', event)
-      Dish.getDishesByEventId(req.params.id,
-        (err, dishesByEvent) => {
+      Dish.getDishesPlusEventInfo(req.params.id,
+        (err, dishEvent) => {
           if (err) {
-            console.log('Failed to get dishes by event', err)
-            res.send('Failed to get dishes by event')
+            console.log('Failed getDishesPlusEventInfo', err)
+            res.send('Failed getDishesPlusEventInfo')
             return
           }
-          console.log('Successfully got dishes', dishesByEvent)
-          Dish.updateUserNameOfMany(dishesByEvent,
-            (err, updatedDishes) => {
-              if (err) {
-                console.log('Failed to add user names to dishes', err)
-                res.send('Failed to add user names to dishes')
-                return
-              }
-              console.log('Successfully got dishes', updatedDishes)
-              res.render('event_show', {
-                "event": event,
-                "dishes": updatedDishes,
-                "userId": req.session.userId
-              })
+          console.log('Successfully getDishesPlusEventInfo', dishEvent)
+          res.render('event_show', {
+            "event": event,
+            "dishes": dishEvent,
+            "userId": req.session.userId
           })
       })
     })

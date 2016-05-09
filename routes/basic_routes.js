@@ -45,24 +45,29 @@ router.get("/logout",function(req,res){
 })
 
 // Signup
-router.post('/signup', function(req, res){
+router.post('/signup', (req, res) => {
   console.log('### POST /signup', req.body)
 
   User.createUser({
       "name": req.body.name,
       "email": req.body.email,
       "password": req.body.password
-    },
-    (err, userId) => {
-      if (err) {
-        console.log("Failed signup", err)
-        res.send('Failed signup')
-        return
-      }
-      console.log("successful signup", userId)
-      req.session.userId = userId
+    })
+    .then(  (userId) => {
+      console.log("successful signup", userId[0])
+      req.session.userId = userId[0]
       res.redirect('/user/' + req.session.userId)
+    })
+    .catch( (err) => {
+      console.log("Failed signup", err)
+      res.redirect('/')
     })
 })
 
 module.exports = router
+
+// if (err) {
+//   console.log("Failed signup", err)
+//   res.send('Failed signup')
+//   return
+// }

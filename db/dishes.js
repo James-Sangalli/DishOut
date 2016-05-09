@@ -35,29 +35,13 @@ module.exports = {
       .catch( (err) => cb(err) )
   },
 
-  updateUserNameOfMany: (dishes, cb) => {
-    Promise.all(dishes.map( (dish) => {
-      return knex.select('id', 'name').where("id", dish.userId).table("users")
-    }))
-      .then( (usersInArray) => {
-        var users = usersInArray.map(d => {
-            if(d[0]) { return d[0] }
-            else     { return {} }
-          })
-
-        if (users.length) {
-          var updated = dishes.map( (dish, index) => {
-            if (users[index].name) {
-              dish.userName = users[index].name
-            }
-            return dish
-          })
-          cb(null, updated)
-          return
-        }
-
-        cb(null, [])
-      })
+  getDishesPlusEventInfo: (eventId, cb) => {
+    knex('dishes').select('dishes.course as dishCourse',
+                          'dishes.name as dishName',
+                          'dishes.userId as dishUserId')
+      .join('events', 'events.id', '=', 'dishes.eventId')
+      .where('events.id', eventId)
+      .then( (data) => cb(null, data) )
       .catch( (err) => cb(err) )
   }
 

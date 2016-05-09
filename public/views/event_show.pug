@@ -24,15 +24,15 @@ block content
       .dishes
         each dish in dishes
           .dish
-            .course #{dish.course}
-            if dish.userName
-              .dishUser #{dish.userName}
+            .course #{dish.dishCourse}
+            if dish.userId
+              .dishUser #{dish.dishUserId}
             else
               .dishUser
                 form(method='post' action='/dish/claim/' + dish.id + '/' + userId + '/' + event.id)
                   input(type='submit', value="I'll Bring This!")
             if dish.name
-              .dishName #{dish.name}
+              .dishName #{dish.dishName}
             else
               form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
                 input(type='text' name='newDishName')
