@@ -7,6 +7,8 @@ var Strategy = require('passport-facebook').Strategy;
 
 var session = require('express-session')
 
+require("./config/passport")(passport)
+
 // required for passport
 app.use(session({
   secret: 'ssshhhhhh! Top secret!',
