@@ -10,11 +10,11 @@ block content
           .navbar-header
             button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-main-collapse')
               i.fa.fa-bars
-            |                 
+
             a.navbar-brand.page-scroll(href='#page-top')
               i.fa.fa-play-circle
-              |   
-              span.light 
+
+              span.light
               |  DishOut
           // Collect the nav links, forms, and other content for toggling
           .collapse.navbar-collapse.navbar-right.navbar-main-collapse
@@ -22,13 +22,13 @@ block content
               // Hidden li included to remove active class from about link when scrolled up past about section
               li.hidden
                 a(href='#page-top')
-              |                     
+
               li
                 a.page-scroll(href='#about') About
-              |                     
+
               li
                 a.page-scroll(href='#login') Login
-              |                     
+
               li
                 a.page-scroll(href='#signup') Signup
           // /.navbar-collapse
@@ -39,19 +39,19 @@ block content
             .row
               .col-md-8.col-md-offset-2
                 #homeTitle.brand-heading DishOut
-                |                         
+
                 p.intro-text
                   | 'The app that makes sure no one brings the same damn thing
                   br
-                  | to your next event.' 
-                |                         
+                  | to your next event.'
+
                 a.btn.btn-circle.page-scroll(href='#about')
                   i.fa.fa-angle-double-down.animated
-            .row      
+            .row
               .col-md-12
                 .col-md-4.col-md-offset-4
                   .panel.panel-default
-                    .panel-heading 
+                    .panel-heading
                       h3 Sign in to DishOut
                       .panel-body
                         form(method='post', action='/login')
@@ -64,7 +64,7 @@ block content
                             p
                             button.btn.btn-default(type='submit' name='commit' value='Login') Login
                   .panel.panel-default
-                    .panel-heading 
+                    .panel-heading
                       h3 New to DishOut? Register Here
                       .panel-body
                         form(method='post', action='/signup')
@@ -79,18 +79,18 @@ block content
                             input#signuppassword.form-control(type='password', name='password', value='', placeholder='Password')
                             p
                             button.btn.btn-default(type='submit' name='commit' value='Sign Up') Sign Up
-                  
+
       // About Section
       section#about.container.content-section.text-center
         .row
           .col-lg-8.col-lg-offset-2
             h2 About DishOut
-            |                 
-            p DishOut takes the stress out of organising food and requirements for an event. With an easy to use interface, you can 
+
+            p DishOut takes the stress out of organising food and requirements for an event. With an easy to use interface, you can
               strong  create
-              |  and 
-              strong  host events, invite guests 
-              |  and 
+              |  and
+              strong  host events, invite guests
+              |  and
               strong organise
               |  what food you want at your event. You can even specify who should bring what dish!
             p If you regularly host events, and want to take the fuss out of your next dinner party, then DishOut is for you!
@@ -100,9 +100,8 @@ block content
           .container
             .col-lg-8.col-lg-offset-2
               h2 Tell a Friend
-              |                     
+
               p With the more people you tell, the more chance you will see what dishes you ACTUALLY wanted at your next event. So tell a Friend!
-              |                     
+              
               a.btn.btn-default.btn-lg(href='http://startbootstrap.com/template-overviews/grayscale/') Invite by Email
       // Contact Section
-    

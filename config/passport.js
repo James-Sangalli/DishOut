@@ -29,7 +29,7 @@ module.exports = function (passport) {
 
       process.nextTick(function () {
 
-        User.getUserByEmail(email, function (err,user) {
+        User.getUserByEmail(email, function (err, user) {
           if(err) {
             console.log('ERR: in local-signup getUserByEmail', err)
             return done(err)
@@ -37,7 +37,7 @@ module.exports = function (passport) {
 
           if (user) {
             console.log('USER=truthy: in local-signup getUserByEmail', user)
-            return done(null, false)
+            return done(null, user)
           }
           else {
             console.log('about to make new user (whats req.body?):', req.body)
