@@ -7,29 +7,29 @@ block content
       .panel.panel-default
         .panel-heading 
           h3 Sign in to DishOut
-          .panel-body
-            form(method='post', action='/login')
-              .form-group
-                label(for='email') Email address
-                input#exampleInputEmail1.form-control(type='email', name='email' value='', placeholder='Email')
-              .form-group
-                label(for='password') Password
-                input#exampleInputPassword1.form-control(type='password', name='password', value='', placeholder='Password')
-                p
-                button.btn.btn-default(type='submit' name='commit' value='Login') Login
+        .panel-body
+          form(method='post', action='/login')
+            .form-group
+              label(for='email') Email address
+              input#exampleInputEmail1.form-control(type='email', name='email' value='', placeholder='Email')
+            .form-group
+              label(for='password') Password
+              input#exampleInputPassword1.form-control(type='password', name='password', value='', placeholder='Password')
+              p
+              button.btn.btn-default(type='submit' name='commit' value='Login') Login
                   
         .panel-heading 
           h3 New to DishOut? Register Here
-          .panel-body
-            form(method='post', action='/signup')
-              .form-group
-                label(for='signupname') Your Name
-                input#signupname.form-control(type='text', name='name' value='', placeholder='Name')
-              .form-group
-                label(for='signupemail') Email Address
-                input#signupemail.form-control(type='email', name='email' value='', placeholder='Email')
-              .form-group
-                label(for='signuppassword') Password
-                input#signuppassword.form-control(type='password', name='password', value='', placeholder='Password')
-                p
-                button.btn.btn-default(type='submit' name='commit' value='Sign Up') Sign Up
+        .panel-body
+          form(method='post', action='/signup')
+            .form-group
+              label(for='signupname') Your Name
+              input#signupname.form-control(type='text', name='name' value='', placeholder='Name')
+            .form-group
+              label(for='signupemail') Email Address
+              input#signupemail.form-control(type='email', name='email' value='', placeholder='Email')
+            .form-group
+              label(for='signuppassword') Password
+              input#signuppassword.form-control(type='password', name='password', value='', placeholder='Password')
+              p
+              button.btn.btn-default(type='submit' name='commit' value='Sign Up') Sign Up

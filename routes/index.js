@@ -9,7 +9,7 @@ var guest_routes = require('./guest_routes')
 
 module.exports = function(app, passport) {
   // app.use('/', basic_routes)
-  basic_routes(app, passport)
+  basic_routes(app, passport) // fb related ... ??  passport local -- rename
   app.use('/user', user_routes)
   app.use('/event', event_routes)
   app.use('/dish', dish_routes)

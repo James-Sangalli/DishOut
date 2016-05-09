@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "nm": "nodemon server.js",
-    "knex": "knex migrate:rollback && knex migrate:latest && knex seed:run",
+    // "knex": "knex migrate:rollback && knex migrate:latest && knex seed:run",
+    // not a good idea  -- knex:reset_dev_database  (use ctrl+r)
     "fresh": "npm run knex && npm run start",
     "test": "node tests/test.js | tap-spec"
   },

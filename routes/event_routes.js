@@ -46,8 +46,20 @@ router.post('/', function(req, res) {
     })
 })
 
+
+// /event/:id/guests/create
+// /event/:id/dishes/create
+// /event/:id/info/create
+
+// dishes/create?eventId=3  << this makes event seem optional
+
+// CRUD
+// ReSTFul
+
 // Screen for adding info to an event
 router.get('/:id/addinfo', function(req, res){
+//router.get('/:id/info/new', function(req, res){
+//router.post('/:id/info/create', function(req, res){
   console.log('### GET /event/:id/addinfo')
 
   Event.getEventById(req.params.id,

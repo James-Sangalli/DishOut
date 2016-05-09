@@ -3,11 +3,34 @@ var knex = require('knex')(knexConfig[process.env.NODE_ENV || "development"])
 
 module.exports = {
 
+  // go all promise or all callback
   getDishByDishId: (dishId, cb) => {
-    knex.select().where("id", dishId).table("dishes")
-      .then( (data) => cb(null, data) )
-      .catch( (err) => cb(err) )
+    return knex
+      .select().where("id", dishId).table("dishes")
   },
+
+  //here's how you'd use it
+  getDishesByEventId(4)
+    .then( function(data) { //
+      // do something with data 
+    })
+    .catch( function(err) {
+    })
+
+  ///////
+  //
+  or 
+  
+  getDishByDishId: (dishId, cb) => {
+    knex.select().from('users')
+      .asCallback(cb);
+  }
+
+
+
+
+
+  ///
 
   getDishesByEventId: (eventId, cb) => {
     knex.select().where('eventId', eventId).table('dishes')

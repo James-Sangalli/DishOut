@@ -10,6 +10,7 @@ module.exports = {
   },
 
   getUserByEmail: (email, cb) => {
+    // use knex('users')   .. or just be consisteny
     knex.select().where("email",email).table("users")
       .then( (data) => cb(null, data[0]) )
       .catch( (err) => cb(err) )
@@ -17,6 +18,7 @@ module.exports = {
 
   getUserById: (userId, cb) => {
     knex.select().where("id", userId).table("users")
+      .first()  // or ('*') ?
       .then( (data) => cb(null, data[0]) )
       .catch( (err) => cb(err) )
   },
@@ -27,4 +29,22 @@ module.exports = {
       .catch( (err) => cb(err) )
   }
 
+  getUserByEmail: queryUsersByColumnCreator( 'email', email, cb )
+
 }
+
+//option A
+//function getUserByQuery(query)
+  knex('users').select().where(query)
+// query = {email: 'dave@gmail.com'}
+
+//option B
+function queryUsersByColumnCreator( colName, value, cb ) {
+  return function( value, cb ) {
+    knex("users").select().where(colName, value)
+      .then( (data) => cb(null, data[0]) )
+      .catch( (err) => cb(err) )
+
+  }
+}
+

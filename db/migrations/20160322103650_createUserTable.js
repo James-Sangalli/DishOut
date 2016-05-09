@@ -20,8 +20,8 @@ exports.up = function(knex, Promise) {
    knex.schema.createTableIfNotExists('events', function(table) {
     table.increments('id')
     table.string('name')
-    table.string('date')
-    table.string('time')
+    table.datetime('date') // add a migration to change this 
+    //table.string('time')  // not needed
     table.string('description')
     table.string('location')
   }),
@@ -36,21 +36,22 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return Promise.all ([knex.schema.dropTableIfExists('users').then(function () {
-    console.log('userTable was dropped')
-  }),
-  knex.schema.dropTableIfExists('hosts').then(function () {
-    console.log('hostTable was dropped')
-  }),
-  knex.schema.dropTableIfExists('guests').then(function () {
-    console.log('guestTable was dropped')
-  }),
-  knex.schema.dropTableIfExists('dishes').then(function () {
-    console.log('dishTable was dropped')
-  }),
-  knex.schema.dropTableIfExists('events').then(function () {
-    console.log('eventsTable was dropped')
-  })
+  return Promise.all ([
+    knex.schema.dropTableIfExists('users').then(function () {
+      console.log('userTable was dropped')
+    }),
+    knex.schema.dropTableIfExists('hosts').then(function () {
+      console.log('hostTable was dropped')
+    }),
+    knex.schema.dropTableIfExists('guests').then(function () {
+      console.log('guestTable was dropped')
+    }),
+    knex.schema.dropTableIfExists('dishes').then(function () {
+      console.log('dishTable was dropped')
+    }),
+    knex.schema.dropTableIfExists('events').then(function () {
+      console.log('eventsTable was dropped')
+    })
   ])
 
 };
