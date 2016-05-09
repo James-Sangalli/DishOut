@@ -27,6 +27,7 @@ module.exports = function (passport) {
      clientSecret: process.env.FBSECRET,
      callbackURL: "http://localhost:8080/auth/facebook/callback"
    },
+   
    function(accessToken, refreshToken, profile, done) {
      process.nextTick(function () {
 
@@ -39,7 +40,7 @@ module.exports = function (passport) {
          }
 
          if (user) {
-           console.log('USER=truthy: in local-signup getUserByEmail', user)
+           console.log('USER=truthy: in local-signup getUserByName', user)
            return done(null, false)
          }
          else {
