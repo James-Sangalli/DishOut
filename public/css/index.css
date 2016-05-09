@@ -5,6 +5,7 @@ body {
     font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #fff;
     background-color: #000;
+    webkit-tap-highlight-color: rgba(255,255,255,.2);
 }
 
 #blackNav {
@@ -270,7 +271,7 @@ a:focus {
 }
 
 .content-section {
-    padding-top: 100px;
+    padding-top: 10px;
 }
 
 .download-section {
@@ -293,7 +294,7 @@ a:focus {
 
 @media(min-width:767px) {
     .content-section {
-        padding-top: 250px;
+        padding-top: 80px;
     }
 
     .download-section {
@@ -378,8 +379,4 @@ img::selection {
 
 img::-moz-selection {
     background: 0 0;
-}
-
-body {
-    webkit-tap-highlight-color: rgba(255,255,255,.2);
 }
