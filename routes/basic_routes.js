@@ -36,12 +36,6 @@ module.exports = function (app, passport) {
     res.redirect("/")
   })
 
-  router.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.ejs', {
-            user : req.user // get the user out of session and pass to template
-        });
-    });
-
   app.use('/', router)
 
 }
