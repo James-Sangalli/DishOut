@@ -5,22 +5,22 @@ var Event = require("../db/events")
 
 // User show redirect
 router.get('/show', (req, res) => {
-  console.log('### GET /user/show', req.session.userId)
-
   // TODO
-  req.session.userId = 4
+  // var userId = req.session.passport.user
+  var userId = 4
+  console.log('### GET /user/show', userId)
 
-  res.redirect('/user/' + req.session.userId + '/show')
+  res.redirect('/user/' + userId + '/show')
 })
 
 // Users Homepage
-router.get('/:id/show', function(req, res) {
-  console.log('### GET /user/:id/show', req.session.userId)
-
+router.get('/:id/show', (req, res) => {
   // TODO
-  req.session.userId = 4
+  // var userId = req.session.passport.user
+  var userId = 4
+  console.log('### GET /user/:id/show', 'UserId:',userId)
 
-  User.getUserById(req.session.userId,
+  User.getUserById(userId,
     (err, user) => {
       if (err) {
         console.log("Error getUserById from DB", err)
@@ -28,7 +28,7 @@ router.get('/:id/show', function(req, res) {
         return
       }
       console.log("getUserById returned, now on to getHostedEvents")
-      Event.getEventsByHostId(req.session.userId,
+      Event.getEventsByHostId(userId,
         (err, hosting) => {
           if (err) {
             console.log("Error getEventsByHostId", err)
@@ -36,7 +36,7 @@ router.get('/:id/show', function(req, res) {
             return
           }
           console.log("Successful getEventsByHostId", hosting)
-          Event.getEventsByGuestId(req.session.userId,
+          Event.getEventsByGuestId(userId,
             (err, attending) => {
               if (err) {
                 console.log("Error getEventsByGuestId", err)
@@ -57,9 +57,9 @@ router.get('/:id/show', function(req, res) {
 
 router.get('/:id/edit', (req, res) => {
   // TODO
-  // var userId = req.session.userId
+  // var userId = req.session.passport.user
   var userId = 4
-  console.log('### GET /user/:id/edit', userId)
+  console.log('### GET /user/:id/edit', 'UserId: ', userId)
 
   User.getUserById(userId,
     (err, data) => {

@@ -1,6 +1,8 @@
 //CSS Styling Reference
 
-.title = "Main page Titles"
+.bodyText = 'Container for all body text'
+
+<!-- .title = "Main page Titles"
 .subTitle = "Secondary Titles on each page"
 .subSubTitle = "Third level title on each page"
 .eventInfo = "Event details div containing event details"
@@ -32,4 +34,4 @@
     .dish = "particular dish div"
       .course #{dish.course}
       .dishUser #{dish.userId}
-      .dishName #{dish.name}
+      .dishName #{dish.name} -->

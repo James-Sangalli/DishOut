@@ -3,71 +3,40 @@ var router = express.Router()
 var User = require("../db/users")
 var Help = require("../helpers/helpers")
 
-// Homepage
-router.get('/', function(req, res){
-  console.log("### GET '/'")
+function isLoggedIn(req, res, next) {
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 
-  res.render('index')
-})
-
-// Login
-router.post('/login', function(req, res){
-  console.log('### POST /login')
-
-  Help.hashUserObj(req.body,
-    (err, postHash) => {
-      if (err) {
-        console.log('Failed hash', err)
-        return
-      }
-      console.log('Successful hash', postHash)
-      User.getUserByEmail(postHash.email,
-        (err, userObj) => {
-          if (err) {
-            console.log('Failed getUserByEmail', err)
-            return
-          }
-          console.log('Successful getUserByEmail', userObj)
-
-          console.log("Successful login with id", userObj.id)
-          req.session.userId = userObj.id
-          res.redirect('/user/' + userObj.id)
-        })
+module.exports = function (app, passport) {
+  // Homepage
+  router.get('/', function(req, res){
+    console.log("### GET '/'")
+    res.render('index')
   })
-})
 
-// Logout
-router.get("/logout",function(req,res){
-  console.log('### GET /logout')
+  router.post('/signup', passport.authenticate('local-signup', {
+        successRedirect : '/user/:id', // redirect to the secure profile section
+        failureRedirect : '/', // redirect back to the signup page if there is an error
+  }));
 
-  req.session.destroy()
-  res.redirect("/")
-})
+  router.post("/login", passport.authenticate('local-signup', {
+        successRedirect : '/user/:id', // redirect to the secure profile section
+        failureRedirect : '/', // redirect back to the signup page if there is an error
+  }));
 
-// Signup
-router.post('/signup', (req, res) => {
-  console.log('### POST /signup', req.body)
+    // Logout
+  router.get("/logout",function(req,res){
+    console.log('### GET /logout')
 
-  User.createUser({
-      "name": req.body.name,
-      "email": req.body.email,
-      "password": req.body.password
-    })
-    .then(  (userId) => {
-      console.log("successful signup", userId[0])
-      req.session.userId = userId[0]
-      res.redirect('/user/' + req.session.userId)
-    })
-    .catch( (err) => {
-      console.log("Failed signup", err)
-      res.redirect('/')
-    })
-})
+    req.logout()
+    res.redirect("/")
+  })
+
+  app.use('/', router)
+}
 
 module.exports = router
-
-// if (err) {
-//   console.log("Failed signup", err)
-//   res.send('Failed signup')
-//   return
-// }

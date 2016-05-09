@@ -35,6 +35,7 @@
     "knex": "^0.11.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.0",
+    "passport-local": "^1.0.0",
     "pug": "^2.0.0-alpha6",
     "pug-load": "^1.0.3",
     "redtape": "^1.0.0",
