@@ -5,9 +5,9 @@ var Event = require("../db/events")
 
 // Users Homepage
 router.get('/:id', function(req, res) {
-  console.log('### GET /user/:id', req.session.userId)
+  console.log('### GET /user/:id', req.session.passport.user)
 
-  User.getUserById(req.session.userId,
+  User.getUserById(req.session.passport.user,
     (err, user) => {
       if (err) {
         console.log("Error getUserById from DB", err)
@@ -15,7 +15,7 @@ router.get('/:id', function(req, res) {
         return
       }
       console.log("getUserById returned, now on to getHostedEvents")
-      Event.getEventsByHostId(req.session.userId,
+      Event.getEventsByHostId(req.session.passport.user,
         (err, hosting) => {
           if (err) {
             console.log("Error getEventsByHostId", err)
@@ -23,7 +23,7 @@ router.get('/:id', function(req, res) {
             return
           }
           console.log("Successful getEventsByHostId", hosting)
-          Event.getEventsByGuestId(req.session.userId,
+          Event.getEventsByGuestId(req.session.passport.user,
             (err, attending) => {
               if (err) {
                 console.log("Error getEventsByGuestId", err)
