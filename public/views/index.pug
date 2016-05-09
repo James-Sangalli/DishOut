@@ -31,6 +31,7 @@ block content
 
               li
                 a.page-scroll(href='#signup') Signup
+
           // /.navbar-collapse
         // /.container
       // Intro Header
@@ -63,6 +64,9 @@ block content
                             input#exampleInputPassword1.form-control(type='password', name='password', value='', placeholder='Password')
                             p
                             button.btn.btn-default(type='submit' name='commit' value='Login') Login
+                            a(href='/auth/facebook')
+                                img(border='0', alt='fb', src='http://gratitudebucket.com/grateful/assets/img/facebook_login_1.png', width='220', height='100')
+
                   .panel.panel-default
                     .panel-heading
                       h3 New to DishOut? Register Here
@@ -79,6 +83,7 @@ block content
                             input#signuppassword.form-control(type='password', name='password', value='', placeholder='Password')
                             p
                             button.btn.btn-default(type='submit' name='commit' value='Sign Up') Sign Up
+
 
       // About Section
       section#about.container.content-section.text-center
@@ -102,6 +107,6 @@ block content
               h2 Tell a Friend
 
               p With the more people you tell, the more chance you will see what dishes you ACTUALLY wanted at your next event. So tell a Friend!
-              
+
               a.btn.btn-default.btn-lg(href='http://startbootstrap.com/template-overviews/grayscale/') Invite by Email
       // Contact Section
