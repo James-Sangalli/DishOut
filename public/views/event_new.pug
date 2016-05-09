@@ -1,23 +1,79 @@
 extends layout
 
 block content
-  body
-    .title
-      h1 HOST create new event page (event/new)
-    
-    .login
-      h2 Add Event Information
-    form(action='/event' method='post')
-      Event Name:
-      input(type='text', name='name', placeholder='type event name here')
-      |  Date:
-      input(type='text', name='date', placeholder='type event date here')
-      |  Time:
-      input(type='text', name='time', placeholder='type event name here')
-      |  Description:
-      input(type='text', name='description', placeholder='type brief event description here')
-      |  Location:
-      input(type='text', name='location', placeholder='type event location here')
-      input(type='submit', value='Submit')
-
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
+  body#page-top(data-spy='scroll', data-target='.navbar-fixed-top')
+      // Navigation
+      nav.navbar.navbar-custom.navbar-fixed-top(role='navigation')
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-main-collapse')
+            i.fa.fa-bars
+          |                 
+          a.navbar-brand.page-scroll(href='#page-top')
+            i.fa.fa-play-circle
+            |   
+            span.light DishOut
+            |  
+        // Collect the nav links, forms, and other content for toggling
+        .collapse.navbar-collapse.navbar-right.navbar-main-collapse
+          ul.nav.navbar-nav
+            // Hidden li included to remove active class from about link when scrolled up past about section
+            li.hidden
+              a(href='#page-top')
+            |                     
+            li
+              a.page-scroll(href='#about') About
+            |                     
+            li
+              a.page-scroll(href='#download') Download
+            |                     
+            li
+              a.page-scroll(href='#contact') Contact
+      .container
+        .row
+          .col-md-8.col-md-offset-2
+            h1 Create a New DishOut Event
+            p Simply add the Event Information below
+            form(action='/event' method='post')
+              .form-group
+                label( for="name") Name:
+                input(type="text" class="form-control" name="name" id="name" placeholder="Enter the name of the event here...")
+              .form-group
+                label( for="date") Date:
+                input(type="text" class="form-control" name="date" id="date" placeholder="Enter the date of the event here...")
+              .form-group
+                label( for="time") Time:
+                input(type="text" class="form-control" name="time" id="time" placeholder="Enter the time of the event...")
+              .form-group
+                label( for="location") Location:
+                input(type="text" class="form-control" name="location" id="location" placeholder="Enter the location of the event...")
+              .form-group
+                label( for="description") Description:
+                input(type="text" class="form-control" name="description" id="Description" placeholder="Enter a brief description about the event...")
+              
+              //-   
+              //-   
+              //- |  Date:
+              //- input(type='text', name='date', placeholder='type event date here')
+              //- |  Time:
+              //- input(type='text', name='time', placeholder='type event name here')
+              //- |  Description:
+              //- input(type='text', name='description', placeholder='type brief event description here')
+              //- |  Location:
+              //- input(type='text', name='location', placeholder='type event location here')
+              //- input(type='submit', value='Submit')
+              //- 
+              //- 
+              //- 
+              //- //- Event Name:
+              //- //- input(type='text', name='name', placeholder='type event name here')
+              //- //- 
+              //- //- .form-group
+              //- //-   label( for="name")Name:
+              //- //-   input(type="text" class="form-control" id="name" placeholder="type event name here")
+              //- //- 
+              //- //- 
+              //- //- <div class="form-group">
+              //-   <label for="usr">Name:</label>
+              //-   <input type="text" class="form-control" id="usr">
+              //- </div>
