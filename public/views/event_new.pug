@@ -19,5 +19,55 @@ block content
       |  Location:
       input(type='text', name='location', placeholder='type event location here')
       input(type='submit', value='Submit')
+      
+    .subTitle
+      h2 List of Dishes You Want Guests To bring
+    .dishes
+      if dishes.length
+        each dish in dishes
+          .dish #{dish.course}
+      else
+        p You haven't decided on any dishes for your guests to bring
 
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
+    h3 Add a Dish You Want Guests To Bring:
+
+    form(method="post" action='')
+      select(name="course")
+        option(value='Entree') Entree
+        option(value='Main') Main
+        option(value='Salad') Salad
+        option(value='Dessert') Dessert
+      select(name="numberOf")
+        option(value='1') 1
+        option(value='2') 2
+        option(value='3') 3
+        option(value='4') 4
+      input(type='submit', value='Add Dish')
+
+    hr
+
+    h2 Who Do You Want To Invite?
+    invitedGuests
+      h3 List of invited guests:
+      if guests.length
+        each guest in guests
+          .guest #{guest.name}
+      else
+        p You haven't invited any guests
+
+    h3 Choose someone to invite:
+    form(method="post" action="/guest/email")
+      input(type='hidden',name='eventId' ,value='event.id' )
+      input(type='text', name='email' placeholder='type guests email')
+      input(type='submit', value='Invite Guest')
+      hr
+
+    form(method="post" action="/guest/name")
+      input(type='hidden',name='eventId' ,value='event.id' )
+      input(type='text', name='name' placeholder='type guests name')
+      input(type='submit', value='Invite Guest')
+
+    hr
+
+    form(method="get" action='/user')
+      input(type='submit', value='Done')

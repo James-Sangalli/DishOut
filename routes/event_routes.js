@@ -8,8 +8,12 @@ var Guest = require("../db/guests")
 // Screen for creating an event
 router.get('/new', function(req, res){
   console.log('### GET /event/new')
-
-  res.render('event_new')
+  req.session.userId = 2
+  res.render('event_new', {
+    'userId': req.session.userId,
+    'dishes': {},
+    'guests': {}
+  })
 })
 
 // Creating event

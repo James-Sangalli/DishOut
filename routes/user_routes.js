@@ -3,10 +3,23 @@ var router = express.Router()
 var User = require('../db/users')
 var Event = require("../db/events")
 
-// Users Homepage
-router.get('/:id', function(req, res) {
-  console.log('### GET /user/:id', req.session.userId)
+// User show redirect
+router.get('/show', (req, res) => {
+  console.log('### GET /user/show', req.session.userId)
+
+  // TODO
   req.session.userId = 4
+
+  res.redirect('/user/' + req.session.userId + '/show')
+})
+
+// Users Homepage
+router.get('/:id/show', function(req, res) {
+  console.log('### GET /user/:id/show', req.session.userId)
+
+  // TODO
+  req.session.userId = 4
+
   User.getUserById(req.session.userId,
     (err, user) => {
       if (err) {
@@ -39,6 +52,25 @@ router.get('/:id', function(req, res) {
                 })
             })
         })
+    })
+})
+
+router.get('/:id/edit', (req, res) => {
+  // TODO
+  // var userId = req.session.userId
+  var userId = 4
+  console.log('### GET /user/:id/edit', userId)
+
+  User.getUserById(userId,
+    (err, data) => {
+      if (err) {
+        console.log('Failed getUserById', err)
+        return
+      }
+      console.log('Success getUserById', data)
+      res.render('user_edit', {
+        'userInfo': data
+      })
     })
 })
 
