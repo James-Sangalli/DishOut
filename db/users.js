@@ -3,7 +3,7 @@ var knex = require('knex')(knexConfig[process.env.NODE_ENV || "development"])
 
 module.exports = {
 
-  createUser: (userObj) => {
+  createUser: (userObj,cb) => {
     knex("users").insert(userObj)
       .then( (data) => cb(null, data[0]) )
       .catch( (err) => cb(err) )
