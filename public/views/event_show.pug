@@ -41,6 +41,7 @@ block content
                   onHide: function(){}
                   });
                 #coinwidget-bitcoin-1Ex3TnEdRthoBX8UaGHni47Qy178Z2eWhS
+
     .row
       .col-md-8.col-md-offset-2
         .dishWrapper
@@ -63,11 +64,45 @@ block content
                     input(type='text' name='newDishName')
                     input(type='submit', value="Add Dish Name")
 
+
+    .row
+      .col-md-8.col-md-offset-2
+
+        .panel.panel-default
+          .panel-heading Events I'm Hosting
+          table.table.table-hover
+            thead
+              tr
+                th Name
+                th Date
+                th Time
+                th Location
+            tbody
+              if hosting.length
+                each event in hosting
+                  tr
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.name}
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.date}
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.time}
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.location}
+              else
+                tr
+                  td You're not hosting any events
+
     .row
       .col-md-8.col-md-offset-2
         .dishWrapper
           .title
             h2 List Of Guests
-          .guests
+          table
+            tr
+              .th name
+              .th email
             each guest in guests
-              .guest GuestName: #{guest.name}
+              .tr
+                .td #{guest.name}
+                .td #{guest.email}
