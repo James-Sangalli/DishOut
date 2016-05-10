@@ -3,14 +3,14 @@ var knex = require('knex')(knexConfig[process.env.NODE_ENV || "development"])
 
 module.exports = {
 
-  createUser: (userObj, cb) => {
+  createUser: (userObj) => {
     knex("users").insert(userObj)
       .then( (data) => cb(null, data[0]) )
       .catch( (err) => cb(err) )
   },
 
   getUserByEmail: (email, cb) => {
-    knex.select().where("email",email).table("users")
+    return knex.select().where("email",email).table("users")
       .then( (data) => cb(null, data[0]) )
       .catch( (err) => cb(err) )
   },
@@ -25,6 +25,11 @@ module.exports = {
     knex("users").select().where("name", userName)
       .then( (data) => cb(null, data[0]) )
       .catch( (err) => cb(err) )
-  }
+  },
 
+  updateUser: (userId, userChanges, cb) => {
+    knex('users').update(userChanges).where('id', userId)
+      .then( (data) => cb(null, data[0]) )
+      .catch( (err) => cb(err) )
+  }
 }

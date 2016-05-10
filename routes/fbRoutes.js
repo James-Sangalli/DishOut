@@ -6,6 +6,6 @@ module.exports = function (app, passport) {
   app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/user/:id')
+    res.redirect('/user/show')
   })
 }
