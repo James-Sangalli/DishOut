@@ -95,7 +95,8 @@ router.post('/create', (req, res) => {
       "date": req.body.date,
       "time": req.body.time,
       "description": req.body.description,
-      "location": req.body.location
+      "location": req.body.location,
+      "bitcoinAddress":req.body.bitcoinAddress
     },
     (err, eventId) => {
       if (err) {
@@ -177,7 +178,7 @@ router.post('/:id/edit', (req, res) => {
 
   // TODO
   // update the event (its name, location etc)
-  
+
   res.redirect('/event/' + eventId + '/show')
 })
 
