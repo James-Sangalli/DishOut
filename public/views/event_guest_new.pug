@@ -24,7 +24,7 @@ block content
                 label( for="email") 
                 input(type="text" class="form-control" name="email" id="email" placeholder="Guest Email Address..")
                 input(type="hidden" class="form-control" name="eventId" value=eventId)
-              button.btn.btn-primary(type='submit') Add Guest Email
+              button.btn.btn-primary(type='submit') Invite Guest
                 
     .row
       .col-md-12
@@ -35,11 +35,11 @@ block content
                 label( for="name") 
                 input(type="text" class="form-control" name="name" id="name" placeholder="Guest Name..")
                 input(type='hidden' class="form-control" name="eventId" value=eventId)
-              button.btn.btn-primary(type='submit') Add Guest Name
+              button.btn.btn-primary(type='submit') Invite Guest
               
     .row
       .col-md-12
         .col-md-8.col-md-offset-2
           p After you have added the guest name and email, click 'Invite Guest' below to confirm and invite
           form(action='/event/' + eventId + '/show' method='get')
-            button.btn.btn-success.btn-lg(type='submit') Invite Guest
+            button.btn.btn-success.btn-lg(type='submit') Done

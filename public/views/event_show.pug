@@ -6,18 +6,17 @@ block content
   .container
     .row
       .col-md-8.col-md-offset-2
-        .pageTitle
-          h1 Event: #{event.name}
+        h1 Event Name
 
-        .eventInfo
-          .time
-            time Time: #{event.time}
-          .date
-            date Date: #{event.date}
-          .description
-            description Desctipion: #{event.description}
-          .location
-            location Location: #{event.location}
+        .panel.panel-default
+          .panel-heading Event Information
+          ul.list-group
+            li.list-group-item Name: #{event.name}
+            li.list-group-item Date: #{event.date}
+            li.list-group-item Time: #{event.time}
+            li.list-group-item Location: #{event.location}
+            li.list-group-item Description: #{event.description}
+            
     
     .row
       .col-md-8.col-md-offset-2
@@ -40,12 +39,46 @@ block content
                   form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
                     input(type='text' name='newDishName')
                     input(type='submit', value="Add Dish Name")
+                    
+                    
+    .row
+      .col-md-8.col-md-offset-2
+      
+        .panel.panel-default
+          .panel-heading Events I'm Hosting
+          table.table.table-hover
+            thead
+              tr
+                th Name
+                th Date
+                th Time
+                th Location
+            tbody
+              if hosting.length
+                each event in hosting 
+                  tr 
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.name}
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.date}
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.time}
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.location}
+              else          
+                tr
+                  td You're not hosting any events
 
     .row
       .col-md-8.col-md-offset-2
         .dishWrapper
           .title
             h2 List Of Guests
-          .guests
+          table
+            tr
+              .th name
+              .th email
             each guest in guests
-              .guest GuestName: #{guest.name}
+              .tr
+                .td #{guest.name}
+                .td #{guest.email} 
