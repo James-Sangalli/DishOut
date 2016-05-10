@@ -25,6 +25,11 @@ module.exports = {
     knex("users").select().where("name", userName)
       .then( (data) => cb(null, data[0]) )
       .catch( (err) => cb(err) )
-  }
+  },
 
+  updateUser: (userId, userChanges, cb) => {
+    knex('users').update(userChanges).where('id', userId)
+      .then( (data) => cb(null, data[0]) )
+      .catch( (err) => cb(err) )
+  }
 }

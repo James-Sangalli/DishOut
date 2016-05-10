@@ -3,6 +3,10 @@ var router = express.Router()
 var User = require('../db/users')
 var Event = require("../db/events")
 
+/***************************************
+**********   GETS   *******************
+***************************************/
+
 // User show redirect
 router.get('/show', (req, res) => {
   // TODO
@@ -55,6 +59,14 @@ router.get('/:id/show', (req, res) => {
     })
 })
 
+router.get('/edit', (req, res) => {
+  // TODO
+  // var userId = req.session.passport.user
+  var userId = 4
+  console.log('### GET /user/edit', 'redirecting to /user/:id/edit')
+  res.redirect('/user/' + userId + '/edit')
+})
+
 router.get('/:id/edit', (req, res) => {
   // TODO
   // var userId = req.session.passport.user
@@ -62,15 +74,42 @@ router.get('/:id/edit', (req, res) => {
   console.log('### GET /user/:id/edit', 'UserId: ', userId)
 
   User.getUserById(userId,
-    (err, data) => {
+    (err, user) => {
       if (err) {
         console.log('Failed getUserById', err)
         return
       }
-      console.log('Success getUserById', data)
+      console.log('Success getUserById', user)
       res.render('user_edit', {
-        'userInfo': data
+        'user': user
       })
+    })
+})
+
+/***************************************
+**********   UPDATES   *****************
+***************************************/
+
+router.post('/:id/update', (req, res) => {
+  // TODO
+  // var userId = req.session.passport.user
+  var userId = 4
+  console.log('### POST/UPDATE /user/:id/update', 'UserId: ', userId)
+
+  console.log('req.body:', req.body)
+  var userChanges = {
+    name: req.body.name,
+    email: req.body.email
+  }
+
+  User.updateUser(userId, userChanges,
+    (err, data) => {
+      if (err) {
+        console.log('Failed updateUser', data)
+        return
+      }
+      console.log('Success updateUser', data)
+      res.redirect('/user/' + userId + '/show')
     })
 })
 
