@@ -11,9 +11,14 @@ body {
 #blackNav,
 #blackNav2,
 #blackNav3,
-#blackNav4 {
+#blackNav4,
+#blackNav5 {
   padding-bottom: 75px;
   background: black;
+}
+
+#welcome {
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
 html {
@@ -37,6 +42,7 @@ h6 {
 #homeTitle {
 font-size: 10em;
 font-family: 'Pacifico', cursive;
+text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 
 }
 
