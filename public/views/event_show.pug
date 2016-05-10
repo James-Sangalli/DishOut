@@ -6,7 +6,7 @@ block content
   .container
     .row
       .col-md-8.col-md-offset-2
-        h1 Event Name
+        h1 *Put Event Name Here**
 
         .panel.panel-default
           .panel-heading Event Information
@@ -16,69 +16,40 @@ block content
             li.list-group-item Time: #{event.time}
             li.list-group-item Location: #{event.location}
             li.list-group-item Description: #{event.description}
-            
-    
-    .row
-      .col-md-8.col-md-offset-2
-        .dishWrapper
-          .title
-            h2 Dishes Guests need to bring
-          .dishes
-            each dish in dishes
-              .dish
-                .course #{dish.course}
-                if dish.userName
-                  .dishUser #{dish.userName}
-                else
-                  .dishUser
-                    form(method='post' action='/dish/claim/' + dish.id + '/' + userId + '/' + event.id)
-                      input(type='submit', value="I'll Bring This!")
-                if dish.name
-                  .dishName #{dish.name}
-                else
-                  form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
-                    input(type='text' name='newDishName')
-                    input(type='submit', value="Add Dish Name")
                     
                     
     .row
       .col-md-8.col-md-offset-2
       
         .panel.panel-default
-          .panel-heading Events I'm Hosting
+          .panel-heading Dishes For Guests To Bring
           table.table.table-hover
             thead
               tr
-                th Name
-                th Date
-                th Time
-                th Location
+                th Course
+                th Guest Name
+                th Dish Name
             tbody
-              if hosting.length
-                each event in hosting 
+              if dishes.length
+                each dish in dishes 
                   tr 
-                    td
-                      a(href='/event/' + event.id + '/show') #{event.name}
-                    td
-                      a(href='/event/' + event.id + '/show') #{event.date}
-                    td
-                      a(href='/event/' + event.id + '/show') #{event.time}
-                    td
-                      a(href='/event/' + event.id + '/show') #{event.location}
+                    td #{dish.course}
+                    td #{dish.userName}
+                    td #{dish.name}
               else          
                 tr
                   td You're not hosting any events
 
     .row
       .col-md-8.col-md-offset-2
-        .dishWrapper
-          .title
-            h2 List Of Guests
-          table
-            tr
-              .th name
-              .th email
-            each guest in guests
-              .tr
-                .td #{guest.name}
-                .td #{guest.email} 
+      
+        .panel.panel-default
+          .panel-heading Guest List
+
+          if guests.length
+            ul.list-group
+              each guest in guests 
+                li.list-group-item #{guest.name}
+          else
+            p There are no guests invited to this event
+            
