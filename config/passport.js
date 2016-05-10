@@ -25,9 +25,9 @@ module.exports = function (passport) {
     passport.use(new FBStrategy({
      clientID: process.env.FBID,
      clientSecret: process.env.FBSECRET,
-     callbackURL: "http://localhost:8080/auth/facebook/callback"
+     callbackURL: require("./index").callbackURL
    },
-   
+
    function(accessToken, refreshToken, profile, done) {
      process.nextTick(function () {
 
@@ -41,13 +41,12 @@ module.exports = function (passport) {
 
          if (user) {
            console.log('USER=truthy: in local-signup getUserByName', user)
-           return done(null, false)
+           return done(null, user)
          }
          else {
            console.log('about to make new user (whats from fb):', profile)
            var newUser = {
              name: profile.displayName,
-             email:"noEmailProvided",
              password:"noPasswordProvided"
            }
            console.log('after to make new user (what is user?):', newUser)
