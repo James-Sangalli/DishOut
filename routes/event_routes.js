@@ -62,9 +62,8 @@ router.get('/:id/show', (req, res) => {
   // var eventId = req.params.eventId
   var eventId = 2
   // var userId = req.session.passport.user
-  var viewingUserId = 4
-  console.log('### GET /event/:id/show', 'UserId Viewing this page:', viewingUserId)
-
+  var pageViewer = 4
+  console.log('### GET /event/:id/show', 'UserId Viewing this page:', pageViewer)
 
   Event.getEventById(eventId,
     (err, event) => {
@@ -88,9 +87,9 @@ router.get('/:id/show', (req, res) => {
         }
         console.log('Success getGuestsByEventId', guests)
         res.render('event_show', {
-          "viewingUserId": viewingUserId,
+          "pageViewer": pageViewer,
           "event": event,
-          "dishesList": dishesList,
+          "dishes": dishes,
           "guests": guests
         })
       })
