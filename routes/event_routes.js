@@ -64,10 +64,10 @@ router.get('/:id/guest/new', (req, res) => {
 })
 
 // Show Event page
-router.get('/:id/show', (req, res) => {
+router.get('/:id', (req, res) => {
   // TODO
-  // var eventId = req.params.eventId
-  var eventId = 2
+  var eventId = req.params.id
+  // var eventId = 2
   // var userId = req.session.passport.user
   var pageViewer = 4
   console.log('### GET /event/:id/show', 'UserId Viewing this page:', pageViewer)
@@ -231,7 +231,7 @@ router.post('/:id/edit', (req, res) => {
   // TODO
   // update the event (its name, location etc)
 
-  res.redirect('/event/' + eventId + '/show')
+  res.redirect('/event/' + eventId)
 })
 
 module.exports = router

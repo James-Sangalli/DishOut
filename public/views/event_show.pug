@@ -20,8 +20,29 @@ block content
               .location
                 location Location: #{event.location}
               .bitcoinAddress
-                bitcoinAddress bitcoinAddress: #{event.bitcoinAddress}
+                bitcoinAddress bitcoin guilt jar: #{event.bitcoinAddress}
 
+                script(src='//blockr.io/js_external/coinwidget/coin.js')
+                script.
+                  CoinWidgetCom.go({
+                  wallet_address: '#{event.bitcoinAddress}',
+                  currency: 'bitcoin',
+                  counter: 'count',
+                  lbl_button: 'Guilt Jar',
+                  lbl_count: 'Guilt Jar',
+                  lbl_amount: 'BTC',
+                  lbl_address: 'Deposit some bitcoins if you feel the need!',
+                  qrcode: true,
+                  alignment: 'bl',
+                  decimals: 8,
+                  size: "big",
+                  color: "dark",
+                  countdownFrom: "0",
+                  element: "#coinwidget-bitcoin-13AnkXHRSbwNuAV6TUaZu7fWgdk7VMCZqj",
+                  onShow: function(){},
+                  onHide: function(){}
+                  });
+                #coinwidget-bitcoin-13AnkXHRSbwNuAV6TUaZu7fWgdk7VMCZqj
     .row
       .col-md-8.col-md-offset-2
         .dishWrapper
