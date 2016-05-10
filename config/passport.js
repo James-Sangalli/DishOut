@@ -3,7 +3,9 @@ var LocalStrategy   = require('passport-local').Strategy;
 var helpers = require("../helpers/helpers")
 var User = require("../db/users")
 var FBStrategy = require('passport-facebook').Strategy;
-require("dotenv").config()
+if(process.env.NODE_ENV != "production"){
+  require("dotenv").config()
+}
 
 
 module.exports = function (passport) {
