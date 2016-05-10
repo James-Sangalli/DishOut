@@ -7,18 +7,33 @@ block content
     .row
       .col-md-12
         .col-md-8.col-md-offset-2
-          h1 Add Dishes to your Event
-          form(action='/event/:id/dish/new' method='post')
+          .dishes
+            h2 List Of Dishes 
+            each dish in dishes
+              .dish
+                .course CourseName: #{dish.course}
+                if dish.userName
+                  .dishUser UserName: #{dish.userName}
+                else
+                  .dishUser
+                if dish.name
+                  .dishName DishName: #{dish.name}
+    .row
+      .col-md-12
+        .col-md-8.col-md-offset-2
+          h2 Add Dishes to your Event
+          form(action='/event/:id/dish/create' method='post')
             .form-group
               p Enter a Course - either an Entree, Main, Salad, or Dessert
-                label( for="name") 
-                input(type="text" class="form-control" name="name" id="name" placeholder="Type in the dish name..")
+                label( for="course") 
+                input(type="text" class="form-control" name="course" id="course" placeholder="Type in course..")
             .form-group
               p Enter the specific name of the dish
-                label( for="name") 
-                input(type="text" class="form-control" name="name" id="name" placeholder="Type in the dish name..")
+                label( for="dishname") 
+                input(type="text" class="form-control" name="dishname" id="dishname" placeholder="Type in the dish name..")
+                input(type="hidden" class="form-control" name="eventId" value=eventId)
       
-            button.btn.btn-primary.btn-lg(type='submit' name='') Add Dish
+            button.btn.btn-primary.btn-lg(type='submit') Add Dish
     .row
       .col-md-12
         .col-md-8.col-md-offset-2
@@ -26,7 +41,7 @@ block content
           br
           p Click done when you have finished adding dishes
           form(action='/event/:id/guest/new' method='get')
-            button.btn.btn-success.btn-lg(type='submit' name='') Done
+            button.btn.btn-success.btn-lg(type='submit') Done
             
           //- p Select a Course from the Dropdown Menu
           //-   .dropdown

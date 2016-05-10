@@ -10,7 +10,7 @@ block content
         .table-responsive
         table.table
         | ...
-
+          
           .name
             name
             //- name Name: #{event.name}
@@ -24,31 +24,35 @@ block content
             description
             //- description Desctipion: #{event.description}
           .location
-            location
-            //- location Location: #{event.location}
+            location Location: #{event.location}
+    
+    .row
+      .col-md-8.col-md-offset-2
+        .dishWrapper
+          .title
+            h2 Dishes Guests need to bring
+          .dishes
+            each dish in dishes
+              .dish
+                .course #{dish.course}
+                if dish.userName
+                  .dishUser #{dish.userName}
+                else
+                  .dishUser
+                    form(method='post' action='/dish/claim/' + dish.id + '/' + userId + '/' + event.id)
+                      input(type='submit', value="I'll Bring This!")
+                if dish.name
+                  .dishName #{dish.name}
+                else
+                  form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
+                    input(type='text' name='newDishName')
+                    input(type='submit', value="Add Dish Name")
 
     .row
-      #dishWrapper.col-md-8.col-md-offset-2
-        .title
-          h2 Dishes Guests need to bring
-        .dishes
-          each dish in dishes
-            .dish
-              .course #{dish.course}
-              if dish.userName
-                .dishUser #{dish.userName}
-              else
-                .dishUser
-                  form(method='post' action='/dish/claim/' + dish.id + '/' + userId + '/' + event.id)
-                    input(type='submit', value="I'll Bring This!")
-              if dish.name
-                .dishName #{dish.name}
-              else
-                form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
-                  input(type='text' name='newDishName')
-                  input(type='submit', value="Add Dish Name")
-    .row
-      #guestWrapper.col-md-8.col-md-offset-2
-        .guests
-          each guest in guests
-          
+      .col-md-8.col-md-offset-2
+        .dishWrapper
+          .title
+            h2 List Of Guests
+          .guests
+            each guest in guests
+              .guest GuestName: #{guest.name}
