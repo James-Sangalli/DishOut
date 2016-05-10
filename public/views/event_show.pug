@@ -7,18 +7,25 @@ block content
     .row
       .col-md-8.col-md-offset-2
         .pageTitle
-          h1 Event: #{event.name}
+          //- h1 Event: #{event.name}
 
         .eventInfo
           .time
-            time Time: #{event.time}
+            time
+            //- time Time: #{event.time}
           .date
-            date Date: #{event.date}
+            date
+            //- date Date: #{event.date}
           .description
             description Desctipion: #{event.description}
           .location
             location Location: #{event.location}
-
+    .row
+      <div class="table-responsive">
+        <table class="table">
+          ...
+        </table>
+      </div>
         .guestsDishes
           .title
             h2 Dishes Guests need to bring
