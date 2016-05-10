@@ -15,6 +15,12 @@ module.exports = {
       .catch( (err) => cb(err) )
   },
 
+  createDish: (dishObj, cb) => {
+    knex('dishes').insert(dishObj)
+      .then( (data) => cb(null, data))
+      .catch( (err) => cb(err) )
+  },
+
   createManyDishes: (manyDishObjs, cb) => {
     knex('dishes').insert(manyDishObjs)
       .then( (data) => cb(null, data))
