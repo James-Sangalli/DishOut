@@ -4,7 +4,7 @@ var user_routes = require('./user_routes')
 var event_routes = require('./event_routes')
 var dish_routes = require('./dish_routes')
 var guest_routes = require('./guest_routes')
-var facebook_routes = require("./fbRoutes")
+var facebook_routes = require('./fbRoutes')
 
 
 module.exports = function(app, passport) {
