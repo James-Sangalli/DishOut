@@ -6,103 +6,55 @@ block content
   .container
     .row
       .col-md-8.col-md-offset-2
-        .pageTitle
-          h1 Event: #{event.name}
-            .eventInfo
-              .name
-                name Name: #{event.name}
-              .time
-                time Time: #{event.time}
-              .date
-                date Date: #{event.date}
-              .description
-                description Desctipion: #{event.description}
-              .location
-                location Location: #{event.location}
 
-                script(src='//blockr.io/js_external/coinwidget/coin.js')
-                script.
-                  CoinWidgetCom.go({
-                  wallet_address: '#{event.bitcoinAddress}',
-                  currency: 'bitcoin',
-                  counter: 'count',
-                  lbl_button: 'Guilt Jar',
-                  lbl_count: 'Guilt Jar',
-                  lbl_amount: 'BTC',
-                  lbl_address: 'Deposit some bitcoins if you feel the need!',
-                  qrcode: true,
-                  alignment: 'bl',
-                  decimals: 8,
-                  size: "big",
-                  color: "dark",
-                  countdownFrom: "0",
-                  element: "#coinwidget-bitcoin-1Ex3TnEdRthoBX8UaGHni47Qy178Z2eWhS",
-                  onShow: function(){},
-                  onHide: function(){}
-                  });
-                #coinwidget-bitcoin-1Ex3TnEdRthoBX8UaGHni47Qy178Z2eWhS
+        h1 *Put Event Name Here**
 
+        .panel.panel-default
+          .panel-heading Event Information
+          ul.list-group
+            li.list-group-item Name: #{event.name}
+            li.list-group-item Date: #{event.date}
+            li.list-group-item Time: #{event.time}
+            li.list-group-item Location: #{event.location}
+            li.list-group-item Description: #{event.description}
+
+              
     .row
       .col-md-8.col-md-offset-2
-        .dishWrapper
-          .title
-            h2 Dishes Guests need to bring
-          .dishes
-            each dish in dishes
-              .dish
-                .course #{dish.course}
-                if dish.userName
-                  .dishUser #{dish.userName}
-                else
-                  .dishUser
-                    form(method='post' action='/dish/claim/' + dish.id + '/' + userId + '/' + event.id)
-                      input(type='submit', value="I'll Bring This!")
-                if dish.name
-                  .dishName #{dish.name}
-                else
-                  form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
-                    input(type='text' name='newDishName')
-                    input(type='submit', value="Add Dish Name")
 
+        .panel.panel-default
+          .panel-heading Dishes For Guests To Bring
+          table.table.table-hover
+            thead
+              tr
+                th Course
+                th Guest Name
+                th Dish Name
+            tbody
+            if hosting.length
+              each event in hosting
+                tr
+                  td
+                    a(href='/event/' + event.id + '/show') #{event.name}
+                  td
+                    a(href='/event/' + event.id + '/show') #{event.date}
+                  td
+                    a(href='/event/' + event.id + '/show') #{event.time}
+                  td
+                    a(href='/event/' + event.id + '/show') #{event.location}
+            else
+              tr
+                td You're not hosting any events
 
     .row
       .col-md-8.col-md-offset-2
 
         .panel.panel-default
-          .panel-heading Events I'm Hosting
-          table.table.table-hover
-            thead
-              tr
-                th Name
-                th Date
-                th Time
-                th Location
-            tbody
-              if hosting.length
-                each event in hosting
-                  tr
-                    td
-                      a(href='/event/' + event.id + '/show') #{event.name}
-                    td
-                      a(href='/event/' + event.id + '/show') #{event.date}
-                    td
-                      a(href='/event/' + event.id + '/show') #{event.time}
-                    td
-                      a(href='/event/' + event.id + '/show') #{event.location}
-              else
-                tr
-                  td You're not hosting any events
+          .panel-heading Guest List
 
-    .row
-      .col-md-8.col-md-offset-2
-        .dishWrapper
-          .title
-            h2 List Of Guests
-          table
-            tr
-              .th name
-              .th email
-            each guest in guests
-              .tr
-                .td #{guest.name}
-                .td #{guest.email}
+          if guests.length
+            ul.list-group
+              each guest in guests
+                li.list-group-item #{guest.name}
+          else
+            p There are no guests invited to this event
