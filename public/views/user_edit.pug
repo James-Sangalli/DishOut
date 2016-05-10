@@ -8,7 +8,7 @@ block content
       .col-md-8.col-md-offset-2
         h1 Edit your details
         p Personal info
-        form(action='/user/' + '4' + '/update' method='post')
+        form(action='/user/' + user.id + '/update' method='post')
           .form-group
             label( for="name") Name:
             input(type="text" class="form-control" name="name" id="name" value=user.name)

@@ -83,7 +83,7 @@ module.exports = function (passport) {
 
       process.nextTick(function () {
 
-        User.getUserByEmail(email, function (err, user) {
+        User.getUserByEmail(email, (err, user) => {
           if(err) {
             console.log('ERR: in local-signup getUserByEmail', err)
             return done(err)
@@ -114,7 +114,7 @@ module.exports = function (passport) {
                 }
                 hashedUser.id = data
                 console.log("user successfully create: ", hashedUser)
-                return done(null,hashedUser)
+                return done(null, hashedUser)
               })
             })
           }
