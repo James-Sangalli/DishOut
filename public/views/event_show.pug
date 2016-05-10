@@ -3,23 +3,21 @@ extends layout
 block content
   body#page-top(data-spy='scroll')
   include nav
-      .container
-        .row
-          .col-md-8.col-md-offset-2
-            .pageTitle
-              h1 GUEST view event page (event/:id)
+  .container
+    .row
+      .col-md-8.col-md-offset-2
+        .pageTitle
+          h1 Event: #{event.name}
 
-            .eventInfo
-              .name
-                name Name: #{event.name}
-              .time
-                time Time: #{event.time}
-              .date
-                date Date: #{event.date}
-              .description
-                description Desctipion: #{event.description}
-              .location
-                location Location: #{event.location}
+        .eventInfo
+          .time
+            time Time: #{event.time}
+          .date
+            date Date: #{event.date}
+          .description
+            description Desctipion: #{event.description}
+          .location
+            location Location: #{event.location}
 
             .dishWrapper
               .title
@@ -40,8 +38,3 @@ block content
                       form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
                         input(type='text' name='newDishName')
                         input(type='submit', value="Add Dish Name")
-            
-            .guestWrapper
-              .guests
-                each guest in guests
-                

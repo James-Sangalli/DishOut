@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  body#page-top(data-spy='scroll')
+  include nav
+  .container
+    .row
+      .col-md-12
+        .col-md-8.col-md-offset-2
+          h1 Add Dishes to your Event
+          form(action='/event/:id/dish/new' method='post')
+            .form-group
+              p Enter a Course - either an Entree, Main, Salad, or Dessert
+                label( for="name") 
+                input(type="text" class="form-control" name="name" id="name" placeholder="Type in the dish name..")
+            .form-group
+              p Enter the specific name of the dish
+                label( for="name") 
+                input(type="text" class="form-control" name="name" id="name" placeholder="Type in the dish name..")
+      
+            button.btn.btn-primary.btn-lg(type='submit' name='') Add Dish
+    .row
+      .col-md-12
+        .col-md-8.col-md-offset-2
+          br
+          br
+          p Click done when you have finished adding dishes
+          form(action='/event/:id/guest/new' method='get')
+            button.btn.btn-success.btn-lg(type='submit' name='') Done
+            
+          //- p Select a Course from the Dropdown Menu
+          //-   .dropdown
+          //-     button#dropdownMenu1.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true') 
+          //-       span.caret
+          //-     ul.dropdown-menu(aria-labelledby='dropdownMenu1')
+          //-       li Entree
+          //-       li
+          //-         a(href='#') Main
+          //-       li
+          //-         a(href='#') Salad
+          //-       li
+          //-         a(href='#') Dessert
