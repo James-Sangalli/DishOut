@@ -2,6 +2,9 @@ var User = require('../db/users')
 var LocalStrategy   = require('passport-local').Strategy;
 var helpers = require("../helpers/helpers")
 var User = require("../db/users")
+var FBStrategy = require('passport-facebook').Strategy;
+require("dotenv").config()
+
 
 module.exports = function (passport) {
     // used to serialize the user for the session
@@ -17,6 +20,58 @@ module.exports = function (passport) {
             done(err, user);
         });
     });
+
+    // setup facebook signin
+    passport.use(new FBStrategy({
+     clientID: process.env.FBID,
+     clientSecret: process.env.FBSECRET,
+     callbackURL: "http://localhost:8080/auth/facebook/callback"
+   },
+   
+   function(accessToken, refreshToken, profile, done) {
+     process.nextTick(function () {
+
+       console.log(profile)
+
+       User.getUserByName(profile.displayName, function (err,user) {
+         if(err) {
+           console.log('ERR: in local-signup getUserByName', err)
+           return done(err)
+         }
+
+         if (user) {
+           console.log('USER=truthy: in local-signup getUserByName', user)
+           return done(null, false)
+         }
+         else {
+           console.log('about to make new user (whats from fb):', profile)
+           var newUser = {
+             name: profile.displayName,
+             email:"noEmailProvided",
+             password:"noPasswordProvided"
+           }
+           console.log('after to make new user (what is user?):', newUser)
+
+           helpers.hashUserObj(newUser, function (err, hashedUser) {
+             if (err) {
+               console.log('has failed', err)
+               throw Error('bens error thing', err)
+             }
+             User.createUser(hashedUser, function (err,data) {
+               if(err) {
+                 console.log('failed creating user', err)
+                 throw Error('bens other error thing', err)
+               }
+               hashedUser.id = data
+               console.log("user successfully create: ", hashedUser)
+               return done(null,hashedUser)
+             })
+           })
+         }
+     })
+   })
+ }))
+
 
     passport.use('local-signup', new LocalStrategy({
       // by default, local strategy uses username and password, we will override with email
