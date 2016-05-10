@@ -8,13 +8,13 @@ block content
       .col-md-8.col-md-offset-2
         h1 Edit your details
         p Personal info
-        form(action='/user/edit' method='post')
+        form(action='/user/' + user.id + '/update' method='post')
           .form-group
             label( for="name") Name:
-            input(type="text" class="form-control" name="name" id="name" placeholder="Name")
+            input(type="text" class="form-control" name="name" id="name" value=user.name)
           .form-group
             label( for="email") Email:
-            input(type="text" class="form-control" name="email" id="email" placeholder="Email")
+            input(type="text" class="form-control" name="email" id="email" value=user.email)
           .form-group
             label( for="currentPassword") Current Password:
             input(type="text" class="form-control" name="currentPassword" id="currentPassword" placeholder="Current Password")
@@ -24,7 +24,4 @@ block content
           .form-group
             label( for="newPassword") Confirm New Password:
             input(type="text" class="form-control" name="newPassword" id="newPassword" placeholder="Confirm your New Password")
-          button.btn.btn-default(type='submit' name='commit') Update Details
-            
-
-    
+          button.btn.btn-primary.btn-lg(type='submit') Save Changes

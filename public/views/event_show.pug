@@ -19,7 +19,6 @@ block content
           .location
             location Location: #{event.location}
 
-
         .guestsDishes
           .title
             h2 Dishes Guests need to bring
@@ -39,5 +38,3 @@ block content
                   form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
                     input(type='text' name='newDishName')
                     input(type='submit', value="Add Dish Name")
-                          
-            

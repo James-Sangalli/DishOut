@@ -8,7 +8,7 @@ block content
       .col-md-8.col-md-offset-2
         h1 Create a New DishOut Event
         p Fill in the forms below to create an Event
-        form(action='/event/new' method='post')
+        form(action='/event/create' method='post')
           .form-group
             label( for="name") Name:
             input(type="text" class="form-control" name="name" id="name" placeholder="Enter the name of the event here...")
@@ -25,5 +25,3 @@ block content
             label( for="description") Description:
             input(type="text" class="form-control" name="description" id="Description" placeholder="Enter a brief description about the event...")
           button.btn.btn-primary.btn-lg(type='submit') Create Event
-              form(method="get" action="/event/create")
-          

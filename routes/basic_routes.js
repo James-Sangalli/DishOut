@@ -19,12 +19,12 @@ module.exports = function (app, passport) {
   })
 
   router.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/user/:id', // redirect to the secure profile section
+        successRedirect : '/user/show', // redirect to the secure profile section
         failureRedirect : '/', // redirect back to the signup page if there is an error
   }));
 
   router.post("/login", passport.authenticate('local-signup', {
-        successRedirect : '/user/:id', // redirect to the secure profile section
+        successRedirect : '/user/show', // redirect to the secure profile section
         failureRedirect : '/', // redirect back to the signup page if there is an error
   }));
 
@@ -37,5 +37,4 @@ module.exports = function (app, passport) {
   })
 
   app.use('/', router)
-
 }

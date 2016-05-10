@@ -27,7 +27,10 @@ router.post('/:eventId/:userId', function(req, res){
 
 router.post('/claim/:dishId/:userId/:eventId', function(req, res){
   console.log('### POST /dish/claim/:dishId/:userId/:eventId')
-
+  console.log('asdf', {
+    'dishId': req.params.dishId,
+    'userId': req.params.userId
+    })
   Dish.updateGuest({
     'dishId': req.params.dishId,
     'userId': req.params.userId

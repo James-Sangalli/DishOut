@@ -13,13 +13,13 @@ block content
               name Name: #{user.name}
             .email
               email Email: #{user.email}
-          button.btn.btn-default(type='submit') Edit your details
             form(method="get" action="/user/edit")
+              button.btn.btn-default(type='submit') Edit Your Details
         br      
         h3 Creating an Event      
         .createEvent
-          button.btn.btn-primary(type='submit') Create Event
-            form(method="get" action="/event/new")
+          form(method="get" action="/event/new")
+              button.btn.btn-default(type='submit') Create Event
 
         br
         .eventsHosting
