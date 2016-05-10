@@ -7,7 +7,8 @@ block content
     .row
       .col-md-8.col-md-offset-2
 
-        h1 *Put Event Name Here**
+        h1 #{event.name}
+        br
 
         .panel.panel-default
           .panel-heading Event Information
@@ -18,7 +19,7 @@ block content
             li.list-group-item Location: #{event.location}
             li.list-group-item Description: #{event.description}
 
-              
+
     .row
       .col-md-8.col-md-offset-2
 
@@ -31,20 +32,15 @@ block content
                 th Guest Name
                 th Dish Name
             tbody
-            if hosting.length
-              each event in hosting
+              if dishes.length
+                each dish in dishes
+                  tr
+                    td #{dish.course}
+                    td #{dish.userName}
+                    td #{dish.name}
+              else
                 tr
-                  td
-                    a(href='/event/' + event.id + '/show') #{event.name}
-                  td
-                    a(href='/event/' + event.id + '/show') #{event.date}
-                  td
-                    a(href='/event/' + event.id + '/show') #{event.time}
-                  td
-                    a(href='/event/' + event.id + '/show') #{event.location}
-            else
-              tr
-                td You're not hosting any events
+                  td There are no dishes to bring to this event
 
     .row
       .col-md-8.col-md-offset-2
@@ -58,3 +54,29 @@ block content
                 li.list-group-item #{guest.name}
           else
             p There are no guests invited to this event
+
+    script(src='//blockr.io/js_external/coinwidget/coin.js')
+    .row
+      .col-md-8.col-md-offset-2
+        .bitcoin
+          h4 Send Some BitCoin To The Host
+          script.
+            CoinWidgetCom.go({
+              wallet_address: '#{event.bitcoinAddress}',
+              currency: 'bitcoin',
+              counter: 'count',
+              lbl_button: 'Guilt Jar',
+              lbl_count: 'Guilt Jar',
+              lbl_amount: 'BTC',
+              lbl_address: 'Deposit some bitcoins if you feel the need!',
+              qrcode: true,
+              alignment: 'bl',
+              decimals: 8,
+              size: "big",
+              color: "dark",
+              countdownFrom: "0",
+              element: "#coinwidget-bitcoin-1Ex3TnEdRthoBX8UaGHni47Qy178Z2eWhS",
+              onShow: function(){},
+              onHide: function(){}
+            });
+          #coinwidget-bitcoin-1Ex3TnEdRthoBX8UaGHni47Qy178Z2eWhS
