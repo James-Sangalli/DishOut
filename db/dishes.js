@@ -10,7 +10,9 @@ module.exports = {
   },
 
   getDishesByEventId: (eventId, cb) => {
-    knex.select().where('eventId', eventId).table('dishes')
+    knex('dishes').select('dishes.*', 'users.name as userName')
+      .leftJoin('users', 'dishes.userId', '=', 'users.id')
+      .where('dishes.eventId', eventId)
       .then( (data) => cb(null, data) )
       .catch( (err) => cb(err) )
   },
@@ -38,16 +40,6 @@ module.exports = {
     knex('dishes').where('id', dishObj.dishId)
     .update({'name': dishObj.name})
       .then( (data) => cb(null, data))
-      .catch( (err) => cb(err) )
-  },
-
-  getDishesPlusEventInfo: (eventId, cb) => {
-    knex('dishes').select('dishes.course as dishCourse',
-                          'dishes.name as dishName',
-                          'dishes.userId as dishUserId')
-      .join('events', 'events.id', '=', 'dishes.eventId')
-      .where('events.id', eventId)
-      .then( (data) => cb(null, data) )
       .catch( (err) => cb(err) )
   }
 

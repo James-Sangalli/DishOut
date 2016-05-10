@@ -21,13 +21,19 @@ router.get('/:id/dish/new', (req, res) => {
   // TODO
   // var userId = req.session.passport.user
   var userId = 4
+  // var eventId = req.params.eventId
+  var eventId = 4
   console.log('### GET /event/:id/dish/new', 'UserId', userId)
 
-  // TODO
-  // Need to get a list of dishes related to this event
-  var dishesList = {}
-
-  res.render('event_dish_new', dishesList)
+  Dish.getDishesByEventId(eventId,
+    (err, dishes) => {
+    if (err) {
+      console.log('Failed getDishesByEventId', err)
+      return
+    }
+    console.log('Success getDishesByEventId', dishes)
+    res.render('event_dish_new', dishes)
+  })
 })
 
 // Go to the 'Invite a Guest to an Event' page
@@ -35,44 +41,59 @@ router.get('/:id/guest/new', (req, res) => {
   // TODO
   // var userId = req.session.passport.user
   var userId = 4
-  console.log('### GET /event/:id/guest/new', 'UserId', userId)
+  // var eventId = req.params.eventId
+  var eventId = 4
+  console.log('### GET /event/:id/guest/new', 'EventId', eventId)
 
-  // TODO
-  // Need to get a list of guests related to this event
-  var guestList = {}
-
-  res.render('event_guest_new', guestList)
+  Guest.getGuestsByEventId(eventId,
+    (err, guests) => {
+    if (err) {
+      console.log('Failed getGuestsByEventId', err)
+      return
+    }
+    console.log('Success getGuestsByEventId', guests)
+    res.render('event_guest_new', guestList)
+  })
 })
 
 // Show Event page
 router.get('/:id/show', (req, res) => {
   // TODO
-  // var eventId = req.params.id
+  // var eventId = req.params.eventId
   var eventId = 2
   // var userId = req.session.passport.user
-  var viewingUserId = 4
-  console.log('### GET /event/:id/show', 'UserId Viewing this page:', viewingUserId)
+  var pageViewer = 4
+  console.log('### GET /event/:id/show', 'UserId Viewing this page:', pageViewer)
 
-  // TODO
-  // Need to get a event info
-  var eventInfo = {}
-
-  // TODO
-  // Need to get a list of dishes related to this event
-  var dishesList = {}
-
-  // TODO
-  // Need to get a list of guests related to this event
-  var guestList = {}
-
-  // TODO
-  // viewing user might not be needed
-
-  res.render('event_show', {
-    "viewingUserId": viewingUserId,
-    "eventInfo": eventInfo,
-    "dishesList": dishesList,
-    "guestList": guestList
+  Event.getEventById(eventId,
+    (err, event) => {
+    if (err) {
+      console.log('Failed getEventById', err)
+      return
+    }
+    console.log('Success getEventById', event)
+    Dish.getDishesByEventId(eventId,
+      (err, dishes) => {
+      if (err) {
+        console.log('Failed getDishesByEventId', err)
+        return
+      }
+      console.log('Success getDishesByEventId', dishes)
+      Guest.getGuestsByEventId(eventId,
+        (err, guests) => {
+        if (err) {
+          console.log('Failed getGuestsByEventId', err)
+          return
+        }
+        console.log('Success getGuestsByEventId', guests)
+        res.render('event_show', {
+          "pageViewer": pageViewer,
+          "event": event,
+          "dishes": dishes,
+          "guests": guests
+        })
+      })
+    })
   })
 })
 
@@ -177,7 +198,7 @@ router.post('/:id/edit', (req, res) => {
 
   // TODO
   // update the event (its name, location etc)
-  
+
   res.redirect('/event/' + eventId + '/show')
 })
 

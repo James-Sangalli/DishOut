@@ -24,8 +24,8 @@ block content
         br
         .eventsHosting
           h3 Events you are Hosting:
-        if hostedEvents.length
-          each event in hostedEvents
+        if hosting.length
+          each event in hosting
             .event
               a(href='/event/' + event.id) #{event.name} #{event.date} #{event.time}
         else
@@ -36,8 +36,8 @@ block content
         .eventsGuesting
           .subtitle
             h3 Events you are Invited to:
-          if guestedEvents.length
-            each event in guestedEvents
+          if attending.length
+            each event in attending
               .event
                 a(href='/event/' + event.id) #{event.name} #{event.date} #{event.time}
           else

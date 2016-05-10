@@ -6,10 +6,14 @@ block content
   .container
     .row
       .col-md-8.col-md-offset-2
-        .pageTitle
-          //- h1 Event: #{event.name}
-
         .eventInfo
+        .table-responsive
+        table.table
+        | ...
+
+          .name
+            name
+            //- name Name: #{event.name}
           .time
             time
             //- time Time: #{event.time}
@@ -17,31 +21,34 @@ block content
             date
             //- date Date: #{event.date}
           .description
-            description Desctipion: #{event.description}
+            description
+            //- description Desctipion: #{event.description}
           .location
-            location Location: #{event.location}
+            location
+            //- location Location: #{event.location}
+
     .row
-      <div class="table-responsive">
-        <table class="table">
-          ...
-        </table>
-      </div>
-        .guestsDishes
-          .title
-            h2 Dishes Guests need to bring
-          .dishes
-            each dish in dishes
-              .dish
-                .course #{dish.course}
-                if dish.userName
-                  .dishUser #{dish.userName}
-                else
-                  .dishUser
-                    form(method='post' action='/dish/claim/' + dish.id + '/' + userId + '/' + event.id)
-                      input(type='submit', value="I'll Bring This!")
-                if dish.name
-                  .dishName #{dish.name}
-                else
-                  form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
-                    input(type='text' name='newDishName')
-                    input(type='submit', value="Add Dish Name")
+      #dishWrapper.col-md-8.col-md-offset-2
+        .title
+          h2 Dishes Guests need to bring
+        .dishes
+          each dish in dishes
+            .dish
+              .course #{dish.course}
+              if dish.userName
+                .dishUser #{dish.userName}
+              else
+                .dishUser
+                  form(method='post' action='/dish/claim/' + dish.id + '/' + userId + '/' + event.id)
+                    input(type='submit', value="I'll Bring This!")
+              if dish.name
+                .dishName #{dish.name}
+              else
+                form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
+                  input(type='text' name='newDishName')
+                  input(type='submit', value="Add Dish Name")
+    .row
+      #guestWrapper.col-md-8.col-md-offset-2
+        .guests
+          each guest in guests
+          
