@@ -51,8 +51,8 @@ router.get('/:id/show', (req, res) => {
               res.render('user_show',
                 {
                   'user': user,
-                  'hostedEvents': hosting,
-                  'guestedEvents': attending
+                  'hosting': hosting,
+                  'attending': attending
                 })
             })
         })

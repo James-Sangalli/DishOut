@@ -3,12 +3,11 @@ extends layout
 block content
   body#page-top(data-spy='scroll')
   include nav
-      .container
-        .row
-          .col-md-8.col-md-offset-2
-            .pageTitle
-              h1 GUEST view event page (event/:id)
-
+  .container
+    .row
+      .col-md-8.col-md-offset-2
+        .pageTitle
+          h1 Event: #{event.name}
             .eventInfo
               .name
                 name Name: #{event.name}
@@ -23,22 +22,33 @@ block content
               .bitcoinAddress
                 bitcoinAddress bitcoinAddress: #{event.bitcoinAddress}
 
-            .guestsDishes
-              .title
-                h2 Dishes Guests need to bring
-              .dishes
-                each dish in dishes
-                  .dish
-                    .course #{dish.course}
-                    if dish.userName
-                      .dishUser #{dish.userName}
-                    else
-                      .dishUser
-                        form(method='post' action='/dish/claim/' + dish.id + '/' + userId + '/' + event.id)
-                          input(type='submit', value="I'll Bring This!")
-                    if dish.name
-                      .dishName #{dish.name}
-                    else
-                      form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
-                        input(type='text' name='newDishName')
-                        input(type='submit', value="Add Dish Name")
+    .row
+      .col-md-8.col-md-offset-2
+        .dishWrapper
+          .title
+            h2 Dishes Guests need to bring
+          .dishes
+            each dish in dishes
+              .dish
+                .course #{dish.course}
+                if dish.userName
+                  .dishUser #{dish.userName}
+                else
+                  .dishUser
+                    form(method='post' action='/dish/claim/' + dish.id + '/' + userId + '/' + event.id)
+                      input(type='submit', value="I'll Bring This!")
+                if dish.name
+                  .dishName #{dish.name}
+                else
+                  form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
+                    input(type='text' name='newDishName')
+                    input(type='submit', value="Add Dish Name")
+
+    .row
+      .col-md-8.col-md-offset-2
+        .dishWrapper
+          .title
+            h2 List Of Guests
+          .guests
+            each guest in guests
+              .guest GuestName: #{guest.name}

@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  body#page-top(data-spy='scroll')
+  include nav
+  .container
+    .row
+      .col-md-12
+        .col-md-8.col-md-offset-2
+          h1 Invite Guests
+          .guests
+            h2 List Of Guests 
+            if guests
+              each guest in guests
+                .guest GuestName: #{guest.name}
+            else
+              p No guests have been invited yet.
+    .row
+      .col-md-12
+        .col-md-8.col-md-offset-2
+          form(action='/event/:id/guest/create' method='post')
+            .form-group
+              p Enter the Email Address of the person you want to invite
+                label( for="email") 
+                input(type="text" class="form-control" name="email" id="email" placeholder="Guest Email Address..")
+                input(type="hidden" class="form-control" name="eventId" value=eventId)
+              button.btn.btn-primary(type='submit') Add Guest Email
+                
+    .row
+      .col-md-12
+        .col-md-8.col-md-offset-2
+          form(action='/event/:id/guest/create' method='post')
+            .form-group
+              p Enter the Name of the person you want to invite
+                label( for="name") 
+                input(type="text" class="form-control" name="name" id="name" placeholder="Guest Name..")
+                input(type='hidden' class="form-control" name="eventId" value=eventId)
+              button.btn.btn-primary(type='submit') Add Guest Name
+              
+    .row
+      .col-md-12
+        .col-md-8.col-md-offset-2
+          p After you have added the guest name and email, click 'Invite Guest' below to confirm and invite
+          form(action='/event/' + eventId + '/show' method='get')
+            button.btn.btn-success.btn-lg(type='submit') Invite Guest
