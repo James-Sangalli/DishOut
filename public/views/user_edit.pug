@@ -8,7 +8,7 @@ block content
       .col-md-8.col-md-offset-2
         h1 Edit your details
         p Personal info
-        form(action='/event' method='post')
+        form(action='/user/edit' method='post')
           .form-group
             label( for="name") Name:
             input(type="text" class="form-control" name="name" id="name" placeholder="Name")
@@ -22,7 +22,9 @@ block content
             label( for="newPassword") New Password:
             input(type="text" class="form-control" name="newPassword" id="newPassword" placeholder="New Password")
           .form-group
-            label( for="newPassword") Description:
+            label( for="newPassword") Confirm New Password:
             input(type="text" class="form-control" name="newPassword" id="newPassword" placeholder="Confirm your New Password")
+          button.btn.btn-default(type='submit' name='commit') Update Details
+            
 
     
