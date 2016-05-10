@@ -1,11 +1,26 @@
 extends layout
 
 block content
-  body
-    .title
-      h1 User Homepage
-    .userDetails    
-      .name
-        name Name: #{user.name}
-      .email 
-        email Email: #{user.email}
+  body#page-top(data-spy='scroll')
+  include nav
+  .container
+    .row
+      .col-md-8.col-md-offset-2
+        h1 Edit your details
+        p Personal info
+        form(action='/event' method='post')
+          .form-group
+            label( for="name") Name:
+            input(type="text" class="form-control" name="name" id="name" placeholder="Name")
+          .form-group
+            label( for="email") Email:
+            input(type="text" class="form-control" name="email" id="email" placeholder="Email")
+          .form-group
+            label( for="currentPassword") Current Password:
+            input(type="text" class="form-control" name="currentPassword" id="currentPassword" placeholder="Current Password")
+          .form-group
+            label( for="newPassword") New Password:
+            input(type="text" class="form-control" name="newPassword" id="newPassword" placeholder="New Password")
+          .form-group
+            label( for="newPassword") Description:
+            input(type="text" class="form-control" name="newPassword" id="newPassword" placeholder="Confirm your New Password")

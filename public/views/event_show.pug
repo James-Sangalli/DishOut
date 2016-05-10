@@ -1,69 +1,42 @@
 extends layout
 
 block content
-  body#page-top(data-spy='scroll', data-target='.navbar-fixed-top')
-      // Navigation
-      nav.navbar.navbar-custom.navbar-fixed-top(role='navigation')
-        .container
-          .navbar-header
-            button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-main-collapse')
-              i.fa.fa-bars
-            |                 
-            a.navbar-brand.page-scroll(href='#page-top')
-              i.fa.fa-play-circle
-              |   
-              span.light DishOut
-              |  
-          // Collect the nav links, forms, and other content for toggling
-          .collapse.navbar-collapse.navbar-right.navbar-main-collapse
-            ul.nav.navbar-nav
-              // Hidden li included to remove active class from about link when scrolled up past about section
-              li.hidden
-                a(href='#page-top')
-              |                     
-              li
-                a.page-scroll(href='#home') Home
-              |                     
-              li
-                a.page-scroll(href='#signout') Sign Out
+  body#page-top(data-spy='scroll')
+  include nav
+      .container
+        .row
+          .col-md-8.col-md-offset-2
+            .pageTitle
+              h1 GUEST view event page (event/:id)
 
-    .container
-      .row
-        .col-md-8.col-md-offset-2
-    .pageTitle
-      h1 GUEST view event page (event/:id)
+            .eventInfo
+              .name
+                name Name: #{event.name}
+              .time
+                time Time: #{event.time}
+              .date
+                date Date: #{event.date}
+              .description
+                description Desctipion: #{event.description}
+              .location
+                location Location: #{event.location}
 
-    .eventInfo
-      .name
-        name Name: #{event.name}
-      .time
-        time Time: #{event.time}
-      .date
-        date Date: #{event.date}
-      .description
-        description Desctipion: #{event.description}
-      .location
-        location Location: #{event.location}
-
-
-    .guestsDishes
-      .title
-        h2 Dishes Guests need to bring
-      .dishes
-        each dish in dishes
-          .dish
-            .course #{dish.dishCourse}
-            if dish.userId
-              .dishUser #{dish.dishUserId}
-            else
-              .dishUser
-                form(method='post' action='/dish/claim/' + dish.id + '/' + userId + '/' + event.id)
-                  input(type='submit', value="I'll Bring This!")
-            if dish.name
-              .dishName #{dish.dishName}
-            else
-              form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
-                input(type='text' name='newDishName')
-                input(type='submit', value="Add Dish Name")
-                      
-    
+            .guestsDishes
+              .title
+                h2 Dishes Guests need to bring
+              .dishes
+                each dish in dishes
+                  .dish
+                    .course #{dish.course}
+                    if dish.userName
+                      .dishUser #{dish.userName}
+                    else
+                      .dishUser
+                        form(method='post' action='/dish/claim/' + dish.id + '/' + userId + '/' + event.id)
+                          input(type='submit', value="I'll Bring This!")
+                    if dish.name
+                      .dishName #{dish.name}
+                    else
+                      form(method='post' action='/dish/name/' + dish.id + '/' + userId + '/' + event.id)
+                        input(type='text' name='newDishName')
+                        input(type='submit', value="Add Dish Name")

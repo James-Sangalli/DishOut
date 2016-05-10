@@ -32,7 +32,7 @@ router.get('/:id/show', (req, res) => {
         (err, hosting) => {
           if (err) {
             console.log("Error getEventsByHostId", err)
-            res.send('Failed getEventsByHostId')
+            res.send('Failed getEventsByHostId' )
             return
           }
           console.log("Successful getEventsByHostId", hosting)
