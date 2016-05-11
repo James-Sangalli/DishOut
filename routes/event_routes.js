@@ -43,10 +43,10 @@ router.get('/:id/dish/new', (req, res) => {
 
 // Go to the 'Invite a Guest to an Event' page
 router.get('/:id/guest/new', (req, res) => {
-  // var userId = req.session.passport.user
-  // var eventId = req.params.id
-  var userId = 1
-  var eventId = 1
+  var userId = req.session.passport.user
+  var eventId = req.params.id
+  // var userId = 1
+  // var eventId = 1
 
   console.log('### GET /event/:id/guest/new', 'EventId', eventId)
 
