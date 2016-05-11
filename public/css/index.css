@@ -54,15 +54,11 @@ p {
     line-height: 1.5;
 }
 
-.likeabutton {
-    text-decoration: none; font: menu;
-    display: inline-block; padding: 2px 8px;
-    background: ButtonFace; color: ButtonText;
-    border-style: solid; border-width: 2px;
-    border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
-}
-.likeabutton:active {
-    border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+.form-group.required .control-label:before{
+   color: rgb(204, 80, 63);
+   content: "*";
+   position: absolute;
+   margin-left: -15px;
 }
 
 @media(min-width:768px) {
