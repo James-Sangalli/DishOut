@@ -9,108 +9,76 @@ var Event = require("../db/events")
 
 // User show redirect
 router.get('/show', (req, res) => {
-  // TODO
-  var userId = req.session.passport.user
-  // var userId = 4
   console.log('### GET /user/show', userId)
 
-  res.redirect('/user/' + userId + '/show')
+  res.redirect('/user/' + req.session.passport.user + '/show')
 })
 
 // Users Homepage
 router.get('/:id/show', (req, res) => {
-  // TODO
   var userId = req.session.passport.user
-  // var userId = 4
   console.log('### GET /user/:id/show', 'UserId:',userId)
 
   User.getUserById(userId,
     (err, user) => {
-      if (err) {
-        console.log("Error getUserById from DB", err)
-        res.send('Failed getUserById')
-        return
-      }
-      console.log("getUserById returned, now on to getHostedEvents")
+      if (err) return console.log("Error getUserById from DB", err)
+
+      console.log("Success getUserById", user)
       Event.getEventsByHostId(userId,
         (err, hosting) => {
-          if (err) {
-            console.log("Error getEventsByHostId", err)
-            res.send('Failed getEventsByHostId' )
-            return
-          }
+          if (err) return console.log("Error getEventsByHostId", err)
+
           console.log("Successful getEventsByHostId", hosting)
           Event.getEventsByGuestId(userId,
             (err, attending) => {
-              if (err) {
-                console.log("Error getEventsByGuestId", err)
-                res.send('Failed getEventsByGuestId')
-                return
-              }
+              if (err) return console.log("Error getEventsByGuestId", err)
+
               console.log("Successful getEventsByGuestId", attending)
               res.render('user_show',
                 {
                   'user': user,
                   'hosting': hosting,
                   'attending': attending
-                })
-            })
-        })
-    })
-})
+}) }) }) }) })
+
 
 router.get('/edit', (req, res) => {
-  // TODO
-  var userId = req.session.passport.user
-  // var userId = 4
   console.log('### GET /user/edit', 'redirecting to /user/:id/edit')
-  res.redirect('/user/' + userId + '/edit')
+  res.redirect('/user/' + req.session.passport.user + '/edit')
 })
 
+
 router.get('/:id/edit', (req, res) => {
-  // TODO
   var userId = req.session.passport.user
-  // var userId = 4
   console.log('### GET /user/:id/edit', 'UserId: ', userId)
 
   User.getUserById(userId,
     (err, user) => {
-      if (err) {
-        console.log('Failed getUserById', err)
-        return
-      }
+      if (err) return console.log('Failed getUserById', err)
+
       console.log('Success getUserById', user)
-      res.render('user_edit', {
-        'user': user
-      })
-    })
-})
+      res.render('user_edit', { 'user': user })
+}) })
+
 
 /***************************************
 **********   UPDATES   *****************
 ***************************************/
 
+// Post user update
 router.post('/:id/update', (req, res) => {
-  // TODO
   var userId = req.session.passport.user
-  // var userId = 4
   console.log('### POST/UPDATE /user/:id/update', 'UserId: ', userId)
 
-  console.log('req.body:', req.body)
-  var userChanges = {
-    name: req.body.name,
-    email: req.body.email
-  }
-
-  User.updateUser(userId, userChanges,
+  User.updateUser(userId,
+    { name: req.body.name,
+      email: req.body.email
+    },
     (err, data) => {
-      if (err) {
-        console.log('Failed updateUser', data)
-        return
-      }
+      if (err) return console.log('Failed updateUser', data)
+
       console.log('Success updateUser', data)
       res.redirect('/user/' + userId + '/show')
-    })
-})
+}) })
 
 module.exports = router
