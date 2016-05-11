@@ -10,8 +10,8 @@ var Event = require("../db/events")
 // User show redirect
 router.get('/show', (req, res) => {
   // TODO
-  // var userId = req.session.passport.user
-  var userId = 4
+  var userId = req.session.passport.user
+  // var userId = 4
   console.log('### GET /user/show', userId)
 
   res.redirect('/user/' + userId + '/show')
@@ -20,8 +20,8 @@ router.get('/show', (req, res) => {
 // Users Homepage
 router.get('/:id/show', (req, res) => {
   // TODO
-  // var userId = req.session.passport.user
-  var userId = 4
+  var userId = req.session.passport.user
+  // var userId = 4
   console.log('### GET /user/:id/show', 'UserId:',userId)
 
   User.getUserById(userId,
@@ -61,16 +61,16 @@ router.get('/:id/show', (req, res) => {
 
 router.get('/edit', (req, res) => {
   // TODO
-  // var userId = req.session.passport.user
-  var userId = 4
+  var userId = req.session.passport.user
+  // var userId = 4
   console.log('### GET /user/edit', 'redirecting to /user/:id/edit')
   res.redirect('/user/' + userId + '/edit')
 })
 
 router.get('/:id/edit', (req, res) => {
   // TODO
-  // var userId = req.session.passport.user
-  var userId = 4
+  var userId = req.session.passport.user
+  // var userId = 4
   console.log('### GET /user/:id/edit', 'UserId: ', userId)
 
   User.getUserById(userId,
@@ -92,8 +92,8 @@ router.get('/:id/edit', (req, res) => {
 
 router.post('/:id/update', (req, res) => {
   // TODO
-  // var userId = req.session.passport.user
-  var userId = 4
+  var userId = req.session.passport.user
+  // var userId = 4
   console.log('### POST/UPDATE /user/:id/update', 'UserId: ', userId)
 
   console.log('req.body:', req.body)
