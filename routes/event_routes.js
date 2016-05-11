@@ -5,6 +5,7 @@ var Host = require("../db/hosts")
 var Dish = require("../db/dishes")
 var Guest = require("../db/guests")
 var User = require("../db/users")
+var Help = require('../helpers/helpers')
 
 /**************************************
 **********   GETS   *******************
@@ -70,6 +71,7 @@ router.get('/:id/show', (req, res) => {
 
         console.log('Success getGuestsByEventId', guests)
         res.render('event_show', {
+          'eventId': eventId,
           "pageViewer": pageViewer,
           "event": event,
           "dishes": dishes,
@@ -189,6 +191,24 @@ router.post('/:id/update', (req, res) => {
       if (err) return console.log('Failed createGuest', err)
 
       console.log("Successful createGuest", guestId)
+      res.redirect('/event/' + eventId + '/show')
+  })
+})
+
+router.post('/:eId/dish/:dId/update', (req, res) => {
+  var eventId = req.params.eId
+  var dishId = req.params.dId
+  var userId = req.session.passport.user
+  console.log('### POST /event/:id/dish/update', 'EventId', eventId)
+
+  Dish.updateDish(dishId, eventId, {
+      'userId': userId,
+      'name': req.body.dishName ? req.body.dishName : ''
+    },
+    (err, data) => {
+      if (err) return console.log('Failed updateGuest', err)
+
+      console.log("Successful updateGuest", data)
       res.redirect('/event/' + eventId + '/show')
   })
 })

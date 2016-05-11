@@ -1,8 +1,8 @@
 var express = require('express')
 var router = express.Router()
-var Help = require('../helpers/helpers')
 var User = require('../db/users')
 var Event = require("../db/events")
+var Help = require('../helpers/helpers')
 
 /***************************************
 **********   GETS   *******************
