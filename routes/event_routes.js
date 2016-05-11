@@ -162,8 +162,8 @@ router.post('/:id/dish/create', (req, res) => {
 
 
 router.post('/:id/guest/create', (req, res) => {
-  // var eventId = req.params.id
-  var eventId = 1
+  var eventId = req.params.id
+  // var eventId = 1
 
   console.log('### POST /event/:id/guest/create', 'EventId', eventId)
   console.log("req.body ", req.body)
