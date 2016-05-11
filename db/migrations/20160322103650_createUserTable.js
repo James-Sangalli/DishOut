@@ -24,6 +24,7 @@ exports.up = function(knex, Promise) {
     table.string('time')
     table.string('description')
     table.string('location')
+    table.string('bitcoinAddress').nullable()
   }),
   knex.schema.createTableIfNotExists("dishes",function(table){
     table.increments('id')
