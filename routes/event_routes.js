@@ -148,19 +148,24 @@ router.post('/:id/guest/create', (req, res) => {
   var eventId = req.params.id
   var userId = req.session.passport.user
   console.log('### POST /event/:id/guest/create', 'EventId', eventId)
+  console.log("req.body ", req.body)
+  var userSearch = req.body.userSearch.toLowerCase().trim()
 
   var query = {}
-  if (req.body.email) {
-    query.email = req.body.email
+
+  if (userSearch.includes("@")) {
+    query.email = userSearch
   } else {
-    query.name = req.body.name
+    query.name = userSearch
   }
+
+  console.log("query ",query)
 
   User.getUserByEmailOrName(query,
     (err, user) => {
-      if (err) return console.log('Failed getUserByEmail', err)
+      if (err) return console.log('Failed getUserByEmailOrName', err)
 
-      console.log("Successful getUserByEmail", user)
+      console.log("Successful getUserByEmailOrName", user)
       Guest.createGuest({
           'eventId': eventId,
           'userId': user.id
