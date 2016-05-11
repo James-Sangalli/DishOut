@@ -54,15 +54,11 @@ p {
     line-height: 1.5;
 }
 
-.likeabutton {
-    text-decoration: none; font: menu;
-    display: inline-block; padding: 2px 8px;
-    background: ButtonFace; color: ButtonText;
-    border-style: solid; border-width: 2px;
-    border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
-}
-.likeabutton:active {
-    border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+.form-group.required .control-label:before{
+   color: rgb(204, 80, 63);
+   content: "*";
+   position: absolute;
+   margin-left: -15px;
 }
 
 @media(min-width:768px) {
@@ -145,6 +141,7 @@ a:focus {
 
 .navbar-custom .nav li.active a {
     background-color: rgba(255,255,255,.3);
+
 }
 
 .navbar-custom .nav li.active a:hover {
@@ -364,6 +361,12 @@ img::-moz-selection {
 }
 
 i.icon-chevron-down*/
+
+.glyphicon.icon-chevron-down {
+    font-size: 75px;
+    color: black;
+}
+
 
 .form-group {
   text-align: left;
