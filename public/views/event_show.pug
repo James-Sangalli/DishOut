@@ -48,6 +48,7 @@ block content
                     else
                       td
                         form(action='/event/' + eventId + '/dish/' + dish.id + '/update' method='post')
+                          input(type="hidden" class="form-control" name="dishName" value=dish.name)
                           button.btn.btn-primary.btn-xs(type='submit') I'll Bring It
               else
                 tr
