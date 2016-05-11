@@ -7,7 +7,7 @@
         button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-main-collapse')
           i.fa.fa-bars
 
-        a.navbar-brand.page-scroll(href='/')
+        a.navbar-brand.page-scroll(href='/user/show')
           i.fa.fa-play-circle
 
           span.light
@@ -22,6 +22,8 @@
           unless !user
             li
               a.page-scroll Welcome Back #{user.name}!
+            li
+              a.page-scroll(href="/logout") Logout
 
           unless user
             li
