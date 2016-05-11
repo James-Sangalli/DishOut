@@ -11,13 +11,13 @@ exports.up = function(knex, Promise) {
     table.increments('id')
     table.integer('eventId')
     table.integer('userId')
-    table.unique(['eventId','userId'])
+    // table.unique(['eventId','userId'])
   }),
  knex.schema.createTableIfNotExists('guests', function(table) {
     table.increments('id')
     table.integer('eventId')
     table.integer('userId')
-    table.unique(['eventId','userId'])
+    // table.unique(['eventId','userId'])
 
   }),
    knex.schema.createTableIfNotExists('events', function(table) {
