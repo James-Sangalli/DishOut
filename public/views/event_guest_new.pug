@@ -17,18 +17,17 @@ block content
             li.list-group-item No guests have been invited yet.
                             
     .row
-      .col-md-12
-        .col-md-8.col-md-offset-2
-          form(action='/event/' + eventId + '/guest/create' method='post')
-            .form-group
-              p Enter email or name of the person you want to invite
-                label( for="userSearch")
-                input(type="text" class="form-control" name="userSearch" id="userSearch" placeholder="guest email or name...")
-              button.btn.btn-primary(type='submit') Invite Guest
+      .col-md-8.col-md-offset-2
+        form(action='/event/' + eventId + '/guest/create' method='post')
+          .form-group
+            p Enter email or name of the person you want to invite
+              label( for="userSearch")
+              input(type="text" class="form-control" name="userSearch" id="userSearch" placeholder="guest email or name...")
+            button.btn.btn-primary.btn-lg(type='submit') Invite Guest
 
     .row
       .col-md-8.col-md-offset-2
-        p Click 'Done' when you have finished adding Guests
+        p Click 'Done' when finished adding Guests
         form(action='/event/' + eventId + '/show' method='get')
           button.btn.btn-success.btn-lg(type='submit') Done
           br
