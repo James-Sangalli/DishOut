@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  body#page-top(data-spy='scroll')
+  include nav
+  .container
+    .row
+      .col-md-8.col-md-offset-2
+        h1 Edit Your Event
+        p Fill in the form below to edit your Event
+        form(action='/event/' + eventId + 'update' method='post')
+          .form-group
+            label( for="name") Name:
+            input(type="text" class="form-control" name="name" id="name" value=name)
+          .form-group
+            label( for="date") Date:
+            input(type="text" class="form-control" name="date" id="date" value=date)
+          .form-group
+            label( for="time") Time:
+            input(type="text" class="form-control" name="time" id="time" value=time)
+          .form-group
+            label( for="location") Address:
+            input(type="text" class="form-control" name="location" id="location" value=location)
+          .form-group
+            label( for="description") Description:
+            input(type="text" class="form-control" name="description" id="Description" value=description)
+          .form-group
+            label( for="bitcoinAddress") Bitcoin Address:
+            input(type="text" class="form-control" name="bitcoinAddress" id="bitcoinAddress" value=bitcoinAddress)
+          button.btn.btn-primary.btn-lg(type='submit') Update Event

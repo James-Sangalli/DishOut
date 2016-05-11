@@ -53,7 +53,8 @@ block content
               each guest in guests
                 li.list-group-item #{guest.name}
           else
-            p There are no guests invited to this event
+            ul.list-group
+              li.list-group-item There are no guests invited to this event
 
     script(src='//blockr.io/js_external/coinwidget/coin.js')
     .row

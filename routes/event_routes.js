@@ -6,7 +6,7 @@ var Dish = require("../db/dishes")
 var Guest = require("../db/guests")
 var User = require("../db/users")
 
-/***************************************
+/**************************************
 **********   GETS   *******************
 ***************************************/
 
@@ -19,7 +19,7 @@ router.get('/new', (req, res) => {
 // Go to the 'Add dish to an Event' page
 router.get('/:id/dish/new', (req, res) => {
   var userId = req.session.passport.user
-  var eventId = req.params.eventId
+  var eventId = req.params.id
   console.log('### GET /event/:id/dish/new', 'UserId', userId, 'EventId', eventId)
 
   Dish.getDishesByEventId(eventId,
@@ -35,7 +35,7 @@ router.get('/:id/dish/new', (req, res) => {
 // Go to the 'Invite a Guest to an Event' page
 router.get('/:id/guest/new', (req, res) => {
   var userId = req.session.passport.user
-  var eventId = req.params.eventId
+  var eventId = req.params.id
   console.log('### GET /event/:id/guest/new', 'EventId', eventId)
 
   Guest.getGuestsByEventId(eventId,
@@ -77,15 +77,27 @@ router.get('/:id/show', (req, res) => {
 }) }) }) }) })
 
 
+// Go to Edit Event page
+router.get('/:id/edit', (req, res) => {
+  var eventId = req.params.id
+  console.log('### GET /event/:id/edit', 'EventId:', eventId)
+
+  Event.getEventById(eventId,
+    (err, event) => {
+    if (err) return console.log('Failed getEventById', err)
+
+    console.log('Success getEventById', event)
+    res.render('event_edit', event)
+})})
+
 /***************************************
 **********   POSTS   *******************
 ***************************************/
 
 // Creating event
 router.post('/create', (req, res) => {
-  var eventId = req.params.id
   var userId = req.session.passport.user
-  console.log('### POST /event/create', 'EventId', eventId, 'UserId', userId)
+  console.log('### POST /event/create', 'UserId', userId)
 
   Event.createEvent({
       "name": req.body.name,
@@ -117,7 +129,7 @@ router.post('/:id/dish/create', (req, res) => {
   console.log('### POST /event/:id/dish/create', 'EventId', eventId)
 
   Dish.createDish({
-      eventId: req.body.eventId,
+      eventId: eventId,
       course: req.body.course,
       name: req.body.dishname
     },
@@ -147,7 +159,7 @@ router.post('/:id/guest/create', (req, res) => {
 
       console.log("Successful getUserByEmail", user)
       Guest.createGuest({
-          'eventId': req.body.eventId,
+          'eventId': eventId,
           'userId': user.id
         },
         (err, guestId) => {
@@ -162,11 +174,23 @@ router.post('/:id/guest/create', (req, res) => {
 ***************************************/
 
 
-router.post('/:id/edit', (req, res) => {
+router.post('/:id/update', (req, res) => {
   var eventId = req.params.id
   console.log('### POST /event/:id/edit', 'EventId', eventId)
 
-  res.redirect('/event/' + eventId)
+  Event.updateEvent(eventId,  {
+      name: req.body.name,
+      date: req.body.date,
+      time: req.body.time,
+      description: req.body.description,
+      location: req.body.location
+    },
+    (err, guestId) => {
+      if (err) return console.log('Failed createGuest', err)
+
+      console.log("Successful createGuest", guestId)
+      res.redirect('/event/' + eventId + '/show')
+  })
 })
 
 module.exports = router
