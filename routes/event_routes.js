@@ -19,7 +19,8 @@ router.get('/new', (req, res) => {
 // Go to the 'Add dish to an Event' page
 router.get('/:id/dish/new', (req, res) => {
   var userId = req.session.passport.user
-  var eventId = req.params.eventId
+  var eventId = req.params.id
+  console.log(req.params)
   console.log('### GET /event/:id/dish/new', 'UserId', userId, 'EventId', eventId)
 
   Dish.getDishesByEventId(eventId,
