@@ -29,16 +29,9 @@ module.exports = {
       .catch( (err) => cb(err) )
   },
 
-  updateGuest: (dishObj, cb) => {
-    knex('dishes').where('id', dishObj.dishId)
-    .update({'userId': dishObj.userId})
-      .then( (data) => cb(null, data))
-      .catch( (err) => cb(err) )
-  },
-
-  updateName: (dishObj, cb) => {
-    knex('dishes').where('id', dishObj.dishId)
-    .update({'name': dishObj.name})
+  updateDish: (dishId, eventId, dishObj, cb) => {
+    knex('dishes').where({'id': dishId, 'eventId': eventId})
+    .update(dishObj)
       .then( (data) => cb(null, data))
       .catch( (err) => cb(err) )
   }
