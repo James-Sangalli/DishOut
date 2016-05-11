@@ -46,6 +46,7 @@ h6 {
 font-size: 10em;
 font-family: 'Pacifico', cursive;
 text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+
 }
 
 p {
@@ -187,6 +188,7 @@ a:focus {
 }
 
 @media(min-width:768px) {
+
     .intro {
         height: 100%;
         padding: 0;
@@ -347,6 +349,10 @@ ul.banner-social-buttons {
 }
 
 @media(max-width:767px) {
+
+  #homeTitle {font-size: 7em;
+  }
+
     ul.banner-social-buttons li {
         display: block;
         margin-bottom: 20px;
@@ -389,4 +395,8 @@ img::-moz-selection {
 i.icon-chevron-up,
 i.icon-chevron-down {
   color: black;
+}
+
+.form-group {
+  text-align: left;
 }
