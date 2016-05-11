@@ -7,7 +7,7 @@
         button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-main-collapse')
           i.fa.fa-bars
 
-        a.navbar-brand.page-scroll(href='/')
+        a.navbar-brand.page-scroll(href='/user/show')
           i.fa.fa-play-circle
 
           span.light
@@ -19,11 +19,18 @@
           li.hidden
             a(href='#page-top')
 
-          li
-            a.page-scroll(href='/#about') About
+          unless !user
+            li
+              a.page-scroll Welcome Back #{user.name}!
+            li
+              a.page-scroll(href="/logout") Logout
 
-          li
-            a.page-scroll(href='/') Login
+          unless user
+            li
+              a.page-scroll(href='/') Login
 
-          li
-            a.page-scroll(href='/') Signup
+            li
+              a.page-scroll(href='/') Signup
+
+            li
+              a.page-scroll(href='/#about') About

@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+var Help = require('../helpers/helpers')
 var User = require('../db/users')
 var Event = require("../db/events")
 
@@ -8,15 +9,16 @@ var Event = require("../db/events")
 ***************************************/
 
 // User show redirect
-router.get('/show', (req, res) => {
+router.get('/show', Help.isLoggedIn, (req, res) => {
   console.log('### GET /user/show')
-
   res.redirect('/user/' + req.session.passport.user + '/show')
 })
 
 // Users Homepage
 router.get('/:id/show', (req, res) => {
   var userId = req.session.passport.user
+
+
   console.log('### GET /user/:id/show', 'UserId:',userId)
 
   User.getUserById(userId,
