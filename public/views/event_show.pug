@@ -8,7 +8,6 @@ block content
       .col-md-8.col-md-offset-2
 
         h1 #{event.name}
-        br
 
         .panel.panel-default
           .panel-heading Event Information
@@ -18,6 +17,10 @@ block content
             li.list-group-item Time: #{event.time}
             li.list-group-item Location: #{event.location}
             li.list-group-item Description: #{event.description}
+      .col-md-8.col-md-offset-2
+        form(action='/user/show' method='get')
+          button.btn.btn-success(type='submit') Return to Dashboard
+        br
 
 
     .row

@@ -18,11 +18,11 @@ body {
   background: black;
 }
 
-#welcome {
-  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+
+h3{
+  color: rgb(37, 37, 37) !important;
+  margin-top: 1em !important;
 }
-
-
 
 html {
     width: 100%;
@@ -43,9 +43,8 @@ h6 {
 }
 
 #homeTitle {
-font-size: 10em;
+font-size: 6em;
 font-family: 'Pacifico', cursive;
-text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 
 }
 
@@ -53,6 +52,17 @@ p {
     margin: 0 0 25px;
     font-size: 18px;
     line-height: 1.5;
+}
+
+.likeabutton {
+    text-decoration: none; font: menu;
+    display: inline-block; padding: 2px 8px;
+    background: ButtonFace; color: ButtonText;
+    border-style: solid; border-width: 2px;
+    border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+}
+.likeabutton:active {
+    border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
 }
 
 @media(min-width:768px) {
@@ -220,30 +230,7 @@ a:focus {
     transition: background .3s ease-in-out;
 }
 
-.btn-circle:hover,
-.btn-circle:focus {
-    outline: 0;
-    color: #fff;
-    background: rgba(255,255,255,.1);
-}
 
-.btn-circle i.animated {
-    -webkit-transition-property: -webkit-transform;
-    -webkit-transition-duration: 1s;
-    -moz-transition-property: -moz-transform;
-    -moz-transition-duration: 1s;
-}
-
-.btn-circle:hover i.animated {
-    -webkit-animation-name: pulse;
-    -moz-animation-name: pulse;
-    -webkit-animation-duration: 1.5s;
-    -moz-animation-duration: 1.5s;
-    -webkit-animation-iteration-count: infinite;
-    -moz-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    -moz-animation-timing-function: linear;
-}
 
 @-webkit-keyframes pulse {
     0% {
@@ -316,29 +303,7 @@ a:focus {
     }
 }
 
-.btn {
-    border-radius: 0;
-    text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 400;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-}
 
-.btn-default {
-    border: 1px solid #42dca3;
-    color: #42dca3;
-    background-color: transparent;
-}
-
-.btn-default:hover,
-.btn-default:focus {
-    border: 1px solid #42dca3;
-    outline: 0;
-    color: #000;
-    background-color: #42dca3;
-}
 
 ul.banner-social-buttons {
     margin-top: 0;
@@ -393,12 +358,17 @@ img::selection {
 img::-moz-selection {
     background: 0 0;
 }
-
-.icon-chevron-up,
-.icon-chevron-down {
-  color: black;
+/*
+.bootstrap-timepicker-widget.dropdown-menu.timepicker-orient-left.timepicker-orient-bottom.open.icon-chevron-down {
+  color: rgb(37, 37, 37);
 }
+
+i.icon-chevron-down*/
 
 .form-group {
   text-align: left;
+}
+
+#mainBanner {
+  background-color: rgba(0, 0, 0, 0.5); /* Color white with alpha 0.9*/
 }
