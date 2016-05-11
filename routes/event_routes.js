@@ -43,10 +43,8 @@ router.get('/:id/dish/new', (req, res) => {
 
 // Go to the 'Invite a Guest to an Event' page
 router.get('/:id/guest/new', (req, res) => {
-  // var userId = req.session.passport.user
-  // var eventId = req.params.id
-  var userId = 1
-  var eventId = 1
+  var userId = req.session.passport.user
+  var eventId = req.params.id
 
   console.log('### GET /event/:id/guest/new', 'EventId', eventId)
 
@@ -162,8 +160,7 @@ router.post('/:id/dish/create', (req, res) => {
 
 
 router.post('/:id/guest/create', (req, res) => {
-  // var eventId = req.params.id
-  var eventId = 1
+  var eventId = req.params.id
 
   console.log('### POST /event/:id/guest/create', 'EventId', eventId)
   console.log("req.body ", req.body)
