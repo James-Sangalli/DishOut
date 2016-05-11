@@ -19,11 +19,16 @@
           li.hidden
             a(href='#page-top')
 
-          li
-            a.page-scroll(href='/#about') About
+          unless !user
+            li
+              a.page-scroll Welcome Back #{user.name}!
 
-          li
-            a.page-scroll(href='/') Login
+          unless user
+            li
+              a.page-scroll(href='/') Login
 
-          li
-            a.page-scroll(href='/') Signup
+            li
+              a.page-scroll(href='/') Signup
+
+            li
+              a.page-scroll(href='/#about') About
