@@ -18,24 +18,24 @@ block content
             p No guests have been invited yet.
                             
     .row
-      .col-md-8.col-md-offset-2
-        form(action='/event/:id/guest/create' method='post')
-          .form-group
-            p Enter the Email Address of the person you want to invite
-              label( for="email") 
-              input(type="text" class="form-control" name="email" id="email" placeholder="Guest Email Address..")
-              input(type="hidden" class="form-control" name="eventId" value=eventId)
-            button.btn.btn-primary(type='submit') Invite Guest
-              
+      .col-md-12
+        .col-md-8.col-md-offset-2
+          form(action='/event/' + eventId + '/guest/create' method='post')
+            .form-group
+              p Enter the Email Address of the person you want to invite
+                label( for="email") 
+                input(type="text" class="form-control" name="email" id="email" placeholder="Guest Email Address..")
+              button.btn.btn-primary(type='submit') Invite Guest
+                
     .row
-      .col-md-8.col-md-offset-2
-        form(action='/event/:id/guest/create' method='post')
-          .form-group
-            p Enter the Name of the person you want to invite
-              label( for="name") 
-              input(type="text" class="form-control" name="name" id="name" placeholder="Guest Name..")
-              input(type='hidden' class="form-control" name="eventId" value=eventId)
-            button.btn.btn-primary(type='submit') Invite Guest
+      .col-md-12
+        .col-md-8.col-md-offset-2
+          form(action='/event/' + eventId + '/guest/create' method='post')
+            .form-group
+              p Enter the Name of the person you want to invite
+                label( for="name") 
+                input(type="text" class="form-control" name="name" id="name" placeholder="Guest Name..")
+              button.btn.btn-primary(type='submit') Invite Guest
             
     .row
       .col-md-8.col-md-offset-2

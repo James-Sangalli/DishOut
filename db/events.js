@@ -29,6 +29,12 @@ module.exports = {
       .where('guests.userId', userId)
       .then( (data) => cb(null, data) )
       .catch( (err) => cb(err) )
+  },
+
+  updateEvent: (eventId, eventChanges, cb) => {
+    knex('events').update(eventChanges).where('id', eventId)
+      .then( (data) => cb(null, data[0]) )
+      .catch( (err) => cb(err) )
   }
 
 }

@@ -70,8 +70,8 @@ exports.seed = function(knex, Promise) {
     knex('dishes').insert({course: "Dessert", name: "Brownies", eventId: 3, userId: 6}),
     knex('dishes').insert({course: "Salad", name: "Potato Salad", eventId: 3, userId: 7}),
     knex('dishes').insert({course: "Main", name: "Fish and Chips", eventId: 4, userId: 9}),
-    knex('dishes').insert({course: "Salad", name: "Pinenut Salad", eventId: 4}),
-    knex('dishes').insert({course: "Main", name: "Steak", eventId: 4}),
+    knex('dishes').insert({course: "Salad", eventId: 4}),
+    knex('dishes').insert({course: "Main", eventId: 4}),
     knex('dishes').insert({course: "Dessert", name: "Pavlova", eventId: 4, userId: 2})
   )
 }

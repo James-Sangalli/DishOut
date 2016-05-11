@@ -29,15 +29,27 @@ block content
             thead
               tr
                 th Course
-                th Guest Name
                 th Dish Name
+                th Who's Bringing It?
             tbody
               if dishes.length
                 each dish in dishes
                   tr
                     td #{dish.course}
-                    td #{dish.userName}
-                    td #{dish.name}
+                    if dish.name
+                      td #{dish.name}
+                    else
+                      td
+                        form(class='form-inline' action='/event/' + eventId + '/dish/' + dish.id + '/update' method='post')
+                          input(type="text" class="form-control input-sm" name="dishName" id="dishName")
+                          button.btn.btn-primary.btn-xs(style='margin-left:5px' type='submit') Ok
+                    if dish.userName
+                      td #{dish.userName}
+                    else
+                      td
+                        form(action='/event/' + eventId + '/dish/' + dish.id + '/update' method='post')
+                          input(type="hidden" class="form-control" name="dishName" value=dish.name)
+                          button.btn.btn-primary.btn-xs(type='submit') I'll Bring It
               else
                 tr
                   td There are no dishes to bring to this event
@@ -53,7 +65,8 @@ block content
               each guest in guests
                 li.list-group-item #{guest.name}
           else
-            p There are no guests invited to this event
+            ul.list-group
+              li.list-group-item There are no guests invited to this event
 
     script(src='//blockr.io/js_external/coinwidget/coin.js')
     .row

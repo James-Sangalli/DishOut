@@ -15,7 +15,7 @@ block content
                 tr
                   th Course
                   th Dish Name
-                  th Guest Name
+                  th Who's Bringing It?
               tbody
               if dishes.length
                 each dish in dishes
@@ -27,9 +27,8 @@ block content
     .row
       .col-md-12
         .col-md-8.col-md-offset-2
-          
-          p Add Dishes To Your Event
-          form(action='/event/:id/dish/create' method='post')
+          h2 Add Dishes to your Event
+          form(action='/event/' + eventId + '/dish/create' method='post')
             .form-group
               label( for="course") Enter a Course - either an Entree, Main, Salad, or Dessert
               input(type="text" class="form-control" name="course" id="course" placeholder="Type in course..")
@@ -37,7 +36,6 @@ block content
               label( for="dishname") Enter the specific name of the dish
               input(type="text" class="form-control" name="dishname" id="dishname" placeholder="Type in the dish name..")
               input(type="hidden" class="form-control" name="eventId" value=eventId)
-      
             button.btn.btn-primary.btn-lg(type='submit') Add Dish
     .row
       .col-md-12
@@ -45,18 +43,5 @@ block content
           br
           br
           p Click done when you have finished adding dishes
-          form(action='/event/:id/guest/new' method='get')
+          form(action='/event/' + eventId + '/guest/new' method='get')
             button.btn.btn-success.btn-lg(type='submit') Done
-            
-          //- p Select a Course from the Dropdown Menu
-          //-   .dropdown
-          //-     button#dropdownMenu1.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true') 
-          //-       span.caret
-          //-     ul.dropdown-menu(aria-labelledby='dropdownMenu1')
-          //-       li Entree
-          //-       li
-          //-         a(href='#') Main
-          //-       li
-          //-         a(href='#') Salad
-          //-       li
-          //-         a(href='#') Dessert
