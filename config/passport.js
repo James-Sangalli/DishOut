@@ -96,6 +96,11 @@ module.exports = function (passport) {
             return done(null, user)
           }
           else {
+
+            if(!req.body.name){
+              console.log("User not created!")
+              return done(null,false)
+            }
             console.log('about to make new user (whats req.body?):', req.body)
             var newUser = {
               name: req.body.name.toLowerCase(),
