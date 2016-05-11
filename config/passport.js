@@ -48,7 +48,7 @@ module.exports = function (passport) {
          else {
            console.log('about to make new user (whats from fb):', profile)
            var newUser = {
-             name: profile.displayName,
+             name: profile.displayName.toLowerCase(),
              password:"noPasswordProvided"
            }
            console.log('after to make new user (what is user?):', newUser)
@@ -98,8 +98,8 @@ module.exports = function (passport) {
           else {
             console.log('about to make new user (whats req.body?):', req.body)
             var newUser = {
-              name: req.body.name,
-              email: email,
+              name: req.body.name.toLowerCase(),
+              email: email.toLowerCase(),
               password: password
             }
             console.log('after to make new user (what is user?):', newUser)
