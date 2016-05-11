@@ -5,7 +5,7 @@ block content
   include nav
   header.intro
       .container
-        .row
+        #mainBanner.row
           .col-md-8.col-md-offset-2
             #homeTitle.brand-heading DishOut
 
@@ -27,28 +27,11 @@ block content
                       .form-group
                         label(for='password') Password
                         input#exampleInputPassword1.form-control(type='password', name='password', value='', placeholder='Password')
-                        p
-                        button.btn.btn-default(type='submit' name='commit' value='Login') Login
-                        a(href='/auth/facebook')
-                                img(border='0', alt='fb', src='http://gratitudebucket.com/grateful/assets/img/facebook_login_1.png', width='220', height='100')
-                                  
-              .panel.panel-default
-                .panel-heading
-                  h4 New to DishOut? Register Here
-                  .panel-body
-                    form(method='post', action='/signup')
-                      .form-group
-                        label(for='signupname') Your Name
-                        input#signupname.form-control(type='text', name='name' value='', placeholder='Name')
-                      .form-group
-                        label(for='signupemail') Email Address
-                        input#signupemail.form-control(type='email', name='email' value='', placeholder='Email')
-                      .form-group
-                        label(for='signuppassword') Password
-                        input#signuppassword.form-control(type='password', name='password', value='', placeholder='Password')
-                        p
-                        button.btn.btn-default(type='submit' name='commit' value='Sign Up') Sign Up
-
+                      button.btn.btn-success(type='submit' name='commit' value='Login') Login
+                      a(href='/auth/facebook')
+                              img(border='0', alt='fb', src='http://gratitudebucket.com/grateful/assets/img/facebook_login_1.png', width='220', height='100')
+                      p New to DishOut? Signup
+                                
 
   // Why Dishout Section
   section#about.container.content-section.text-center
@@ -64,7 +47,31 @@ block content
           strong  organise
           |  what food you want at your next event. You can even specify who should bring what dish!
         p If you regularly host events, and want to take the fuss out of your next dinner party, then DishOut is for you!
-  // Tell a Friend Section
+    br
+    br
+    br
+    
+    .row
+      .col-lg-8.col-lg-offset-2
+        h1 New to DishOut?
+        br
+        .panel.panel-default
+          .panel-heading
+            p Sign up for Free today
+            .panel-body
+              form(method='post', action='/signup')
+                .form-group
+                  label(for='signupname') Your Name
+                  input#signupname.form-control(type='text', name='name' value='', placeholder='Name')
+                .form-group
+                  label(for='signupemail') Email Address
+                  input#signupemail.form-control(type='email', name='email' value='', placeholder='Email')
+                .form-group
+                  label(for='signuppassword') Password
+                  input#signuppassword.form-control(type='password', name='password', value='', placeholder='Password')
+                  p
+                  button.btn.btn-default(type='submit' name='commit' value='Sign Up') Sign Up
+  // Signup Section
   section#download.content-section.text-center
     .download-section
       .container
@@ -73,4 +80,4 @@ block content
 
           p With the more people you tell, the more chance you will see what dishes you ACTUALLY wanted at your next event. So tell a Friend!
 
-          a.btn.btn-default.btn-lg(href='http://startbootstrap.com/template-overviews/grayscale/') Invite by Email
+          a.btn.btn-default.btn-lg(href='mailto:?subject=Check out DishOut!&body=Hey, check out this website I found. Its going to make your next event so awesome! URL Link: www.dishout.com') Invite by Email

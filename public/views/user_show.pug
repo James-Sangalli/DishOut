@@ -18,15 +18,12 @@ block content
             li.list-group-item Email: #{user.email}
             
         form(method="get" action="/user/edit")
-          button.btn.btn-default(type='submit') Edit Your Details
+          button.btn.btn-danger(type='submit') Edit Your Details
+        br
+        form(method="get" action="/event/new")
+          button.btn.btn-success(type='submit') Create Event
         br      
-        h3 Creating an Event      
-        .createEvent
-          form(method="get" action="/event/new")
-              button.btn.btn-default(type='submit') Create Event
-              
-        br
-        br
+        
 
     //- HOSTING ROW
     .row
