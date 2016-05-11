@@ -145,8 +145,11 @@ router.post('/:id/dish/create', (req, res) => {
 
 
 router.post('/:id/guest/create', (req, res) => {
-  var eventId = req.params.id
-  var userId = req.session.passport.user
+  // var eventId = req.params.id
+  // var userId = req.session.passport.user
+  var eventId = 4
+  var userId = 1
+  
   console.log('### POST /event/:id/guest/create', 'EventId', eventId)
   console.log("req.body ", req.body)
   var userSearch = req.body.userSearch.toLowerCase().trim()
