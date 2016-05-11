@@ -141,6 +141,7 @@ a:focus {
 
 .navbar-custom .nav li.active a {
     background-color: rgba(255,255,255,.3);
+
 }
 
 .navbar-custom .nav li.active a:hover {
@@ -360,6 +361,12 @@ img::-moz-selection {
 }
 
 i.icon-chevron-down*/
+
+.glyphicon.icon-chevron-down {
+    font-size: 75px;
+    color: black;
+}
+
 
 .form-group {
   text-align: left;

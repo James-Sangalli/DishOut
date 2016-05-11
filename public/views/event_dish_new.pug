@@ -39,10 +39,8 @@ block content
               input(type="text" class="form-control" name="dishname" id="dishname" placeholder="Type in the dish name..")
               input(type="hidden" class="form-control" name="eventId" value=eventId)
             button.btn.btn-primary.btn-lg(type='submit') Add Dish
-    .row
-      .col-md-12
-        .col-md-8.col-md-offset-2
           br
-          h3 Click done to finish adding dishes
+        .col-md-8.col-md-offset-2
           form(action='/event/' + eventId + '/guest/new' method='get')
-            button.btn.btn-success.btn-lg(type='submit') Done
+            button.btn.btn-success.btn-lg(type='submit') Next --->
+          br

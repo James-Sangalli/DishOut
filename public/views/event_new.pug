@@ -15,7 +15,7 @@ block content
             input#id_name.form-control(type="text" class="form-control" required='required', name="name", placeholder="Enter the name of the event here...")
           .form-group.required
             label.control-label Date:
-            input#id_date.form-control(type="text" class="form-control" required='required', name="date", placeholder="Enter the date of the event here...")
+            input#date.form-control(type="text" class="form-control" required='required', name="date", placeholder="Enter the date of the event here...")
             script.
               $('#date').datepicker({
                     format: "dd/mm/yyyy",
@@ -24,7 +24,7 @@ block content
                   })
           .form-group.required
             label.control-label Time:
-            input#id_time.form-control(type="text" class="form-control input-small" required='required', name="time", placeholder="Enter the time of the event here")
+            input#time.form-control(type="text" class="form-control input-small" required='required', name="time", placeholder="Enter the time of the event here")
             script. 
               $('#time').timepicker()
           .form-group.required
@@ -36,7 +36,9 @@ block content
           .form-group
             label( for="bitcoinAddress") Bitcoin Address:
             input(type="text" class="form-control" name="bitcoinAddress" id="bitcoinAddress" placeholder="Please enter a bitcoin address for tips (optional)")
-
-          button.btn.btn-success.btn-lg(type='submit') Create Event
+                      
+          button.btn.btn-success.btn-lg(type='submit') Next -->
+          br
+          br
 
       
