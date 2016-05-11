@@ -29,15 +29,25 @@ router.get('/:id/dish/new', (req, res) => {
     if (err) return console.log('Failed getDishesByEventId', err)
 
     console.log('Success getDishesByEventId', dishes)
-    res.render('event_dish_new', {
-      'eventId': eventId,
-      'dishes': dishes
-}) }) })
+
+    Host.isHost({'userId': userId, 'eventId': eventId},
+      (err, isHost) => {
+      if (err) return console.log('Failed isHost', err)
+
+      console.log('Success isHost', isHost)
+      res.render('event_dish_new', {
+        'isHost':isHost,
+        'eventId': eventId,
+        'dishes': dishes
+}) }) }) })
 
 // Go to the 'Invite a Guest to an Event' page
 router.get('/:id/guest/new', (req, res) => {
-  var userId = req.session.passport.user
-  var eventId = req.params.id
+  // var userId = req.session.passport.user
+  // var eventId = req.params.id
+  var userId = 1
+  var eventId = 1
+
   console.log('### GET /event/:id/guest/new', 'EventId', eventId)
 
   Guest.getGuestsByEventId(eventId,
@@ -53,8 +63,8 @@ router.get('/:id/guest/new', (req, res) => {
 // Show Event page
 router.get('/:id/show', (req, res) => {
   var eventId = req.params.id
-  var pageViewer = req.session.passport.user
-  console.log('### GET /event/:id/show', 'UserId Viewing this page:', pageViewer, 'EventId:', eventId)
+  var userId = req.session.passport.user
+  console.log('### GET /event/:id/show', 'UserId Viewing this page:', userId, 'EventId:', eventId)
 
   Event.getEventById(eventId,
     (err, event) => {
@@ -70,15 +80,22 @@ router.get('/:id/show', (req, res) => {
         (err, guests) => {
         if (err) return console.log('Failed getGuestsByEventId', err)
 
-        console.log('Success getGuestsByEventId', guests)
-        res.render('event_show', {
-          'eventId': eventId,
-          "pageViewer": pageViewer,
-          "event": event,
-          "dishes": dishes,
-          "guests": guests
-}) }) }) }) })
+        Host.isHost({
+          'userId': userId,
+          'eventId': eventId
+          },
+          (err, isHost) => {
+          if (err) return console.log('Failed isHost', err)
 
+          console.log('Success isHost', isHost)
+          res.render('event_show', {
+            'isHost': isHost,
+            'eventId': eventId,
+            "userId": userId,
+            "event": event,
+            "dishes": dishes,
+            "guests": guests
+}) }) }) }) }) })
 
 // Go to Edit Event page
 router.get('/:id/edit', (req, res) => {
@@ -145,8 +162,9 @@ router.post('/:id/dish/create', (req, res) => {
 
 
 router.post('/:id/guest/create', (req, res) => {
-  var eventId = req.params.id
-  var userId = req.session.passport.user
+  // var eventId = req.params.id
+  var eventId = 1
+
   console.log('### POST /event/:id/guest/create', 'EventId', eventId)
   console.log("req.body ", req.body)
   var userSearch = req.body.userSearch.toLowerCase().trim()
@@ -172,10 +190,10 @@ router.post('/:id/guest/create', (req, res) => {
         },
         (err, guestId) => {
           if (err) return console.log('Failed createGuest', err)
-
           console.log("Successful createGuest", guestId)
           res.redirect('/event/' + eventId + '/guest/new')
 }) }) })
+
 
 /***************************************
 **********   UPDATE   *******************

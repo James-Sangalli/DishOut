@@ -17,11 +17,18 @@ block content
             li.list-group-item Time: #{event.time}
             li.list-group-item Location: #{event.location}
             li.list-group-item Description: #{event.description}
+
       .col-md-8.col-md-offset-2
         form(action='/user/show' method='get')
           button.btn.btn-success(type='submit') Return to Dashboard
         br
 
+        
+        if isHost
+          form(method="get" action='/event/' + eventId + '/edit')
+            button.btn.btn-danger(type='submit') Edit Event
+          br
+          br
 
     .row
       .col-md-8.col-md-offset-2
@@ -56,6 +63,11 @@ block content
               else
                 tr
                   td There are no dishes to bring to this event
+        if isHost
+          form(method="get" action='/event/' + eventId + '/dish/new')
+            button.btn.btn-primary(type='submit') Add More Dishes
+          br
+          br  
 
     .row
       .col-md-8.col-md-offset-2
@@ -71,28 +83,35 @@ block content
             ul.list-group
               li.list-group-item There are no guests invited to this event
 
-    script(src='//blockr.io/js_external/coinwidget/coin.js')
-    .row
-      .col-md-8.col-md-offset-2
-        .bitcoin
-          h4 Send Some BitCoin To The Host
-          script.
-            CoinWidgetCom.go({
-              wallet_address: '#{event.bitcoinAddress}',
-              currency: 'bitcoin',
-              counter: 'count',
-              lbl_button: 'Guilt Jar',
-              lbl_count: 'Guilt Jar',
-              lbl_amount: 'BTC',
-              lbl_address: 'Deposit some bitcoins if you feel the need!',
-              qrcode: true,
-              alignment: 'bl',
-              decimals: 8,
-              size: "big",
-              color: "dark",
-              countdownFrom: "0",
-              element: "#coinwidget-bitcoin-1Ex3TnEdRthoBX8UaGHni47Qy178Z2eWhS",
-              onShow: function(){},
-              onHide: function(){}
-            });
-          #coinwidget-bitcoin-1Ex3TnEdRthoBX8UaGHni47Qy178Z2eWhS
+        if isHost
+          form(method="get" action='/event/' + eventId + '/guest/new')
+            button.btn.btn-primary(type='submit') Invite More Guests
+          br
+          br  
+
+    if (event.bitcoinAddress)
+      script(src='//blockr.io/js_external/coinwidget/coin.js')
+      .row
+        .col-md-8.col-md-offset-2
+          .bitcoin
+            h4 Send Some BitCoin To The Host
+            script.
+              CoinWidgetCom.go({
+                wallet_address: '#{event.bitcoinAddress}',
+                currency: 'bitcoin',
+                counter: 'count',
+                lbl_button: 'Guilt Jar',
+                lbl_count: 'Guilt Jar',
+                lbl_amount: 'BTC',
+                lbl_address: 'Deposit some bitcoins if you feel the need!',
+                qrcode: true,
+                alignment: 'bl',
+                decimals: 8,
+                size: "big",
+                color: "dark",
+                countdownFrom: "0",
+                element: "#coinwidget-bitcoin-1Ex3TnEdRthoBX8UaGHni47Qy178Z2eWhS",
+                onShow: function(){},
+                onHide: function(){}
+              });
+            #coinwidget-bitcoin-1Ex3TnEdRthoBX8UaGHni47Qy178Z2eWhS
