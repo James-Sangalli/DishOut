@@ -6,7 +6,7 @@ var Dish = require("../db/dishes")
 var Guest = require("../db/guests")
 var User = require("../db/users")
 
-/***************************************
+/**************************************
 **********   GETS   *******************
 ***************************************/
 
@@ -76,6 +76,19 @@ router.get('/:id/show', (req, res) => {
           "guests": guests
 }) }) }) }) })
 
+
+// Go to Edit Event page
+router.get('/:id/edit', (req, res) => {
+  var eventId = req.params.id
+  console.log('### GET /event/:id/edit', 'EventId:', eventId)
+
+  Event.getEventById(eventId,
+    (err, event) => {
+    if (err) return console.log('Failed getEventById', err)
+
+    console.log('Success getEventById', event)
+    res.render('event_edit', event)
+})})
 
 /***************************************
 **********   POSTS   *******************
@@ -162,11 +175,29 @@ router.post('/:id/guest/create', (req, res) => {
 ***************************************/
 
 
-router.post('/:id/edit', (req, res) => {
-  var eventId = req.params.id
+router.post('/update', (req, res) => {
+  var eventId = req.body.id
   console.log('### POST /event/:id/edit', 'EventId', eventId)
 
-  res.redirect('/event/' + eventId)
+  console.log('reqbody', req.body)
+
+  var eventChanges = {
+    name: req.body.name,
+    date: req.body.date,
+    time: req.body.time,
+    description: req.body.description,
+    location: req.body.location
+  }
+
+  console.log('eventchanges', eventChanges)
+
+  Event.updateEvent(eventId, eventChanges,
+    (err, guestId) => {
+      if (err) return console.log('Failed createGuest', err)
+
+      console.log("Successful createGuest", guestId)
+      res.redirect('/event/' + eventId + '/show')
+  })
 })
 
 module.exports = router

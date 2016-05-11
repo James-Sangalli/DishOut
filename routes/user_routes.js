@@ -9,7 +9,7 @@ var Event = require("../db/events")
 
 // User show redirect
 router.get('/show', (req, res) => {
-  console.log('### GET /user/show', userId)
+  console.log('### GET /user/show')
 
   res.redirect('/user/' + req.session.passport.user + '/show')
 })
