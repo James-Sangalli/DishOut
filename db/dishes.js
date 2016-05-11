@@ -1,5 +1,6 @@
-var knexConfig = require('../knexfile')
-var knex = require('knex')(knexConfig[process.env.NODE_ENV || "development"])
+// var knexConfig = require('../knexfile')
+// var knex = require('knex')(knexConfig[process.env.NODE_ENV || "development"])
+var knex = require('./knexOrigin')
 
 module.exports = {
 
