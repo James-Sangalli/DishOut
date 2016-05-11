@@ -17,8 +17,6 @@ router.get('/show', Help.isLoggedIn, (req, res) => {
 // Users Homepage
 router.get('/:id/show', (req, res) => {
   var userId = req.session.passport.user
-
-
   console.log('### GET /user/:id/show', 'UserId:',userId)
 
   User.getUserById(userId,
