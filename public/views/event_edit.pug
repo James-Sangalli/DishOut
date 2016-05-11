@@ -8,9 +8,7 @@ block content
       .col-md-8.col-md-offset-2
         h1 Edit Your Event
         p Fill in the form below to edit your Event
-        form(action='/event/update' method='post')
-          .form-group
-            input(type="hidden" class="form-control" name="id" id="id" value=id)
+        form(action='/event/' + eventId + 'update' method='post')
           .form-group
             label( for="name") Name:
             input(type="text" class="form-control" name="name" id="name" value=name)
