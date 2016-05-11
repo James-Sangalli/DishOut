@@ -8,35 +8,24 @@ block content
       .col-md-8.col-md-offset-2
         h1 Invite Guests
         .panel.panel-default
-          .panel-heading 
-            p Current List of Guests
-          if guests
-            ul.list-group
-              each guest in guests
-                li.list-group-item #{guest.name}
+          .panel-heading Current List of Guests
+          ul.list-group
+          if guests.length
+            each guest in guests
+              li.list-group-item #{guest.name}
           else
-            p No guests have been invited yet.
+            li.list-group-item No guests have been invited yet.
                             
     .row
       .col-md-12
         .col-md-8.col-md-offset-2
           form(action='/event/' + eventId + '/guest/create' method='post')
             .form-group
-              p Enter the Email Address of the person you want to invite
-                label( for="email") 
-                input(type="text" class="form-control" name="email" id="email" placeholder="Guest Email Address..")
+              p Enter email or name of the person you want to invite
+                label( for="userSearch")
+                input(type="text" class="form-control" name="userSearch" id="userSearch" placeholder="guest email or name...")
               button.btn.btn-primary(type='submit') Invite Guest
-                
-    .row
-      .col-md-12
-        .col-md-8.col-md-offset-2
-          form(action='/event/' + eventId + '/guest/create' method='post')
-            .form-group
-              p Enter the Name of the person you want to invite
-                label( for="name") 
-                input(type="text" class="form-control" name="name" id="name" placeholder="Guest Name..")
-              button.btn.btn-primary(type='submit') Invite Guest
-            
+
     .row
       .col-md-8.col-md-offset-2
         p Click 'Done' when you have finished adding Guests
