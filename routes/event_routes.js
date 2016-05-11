@@ -29,10 +29,17 @@ router.get('/:id/dish/new', (req, res) => {
     if (err) return console.log('Failed getDishesByEventId', err)
 
     console.log('Success getDishesByEventId', dishes)
-    res.render('event_dish_new', {
-      'eventId': eventId,
-      'dishes': dishes
-}) }) })
+
+    Host.isHost({'userId': userId, 'eventId': eventId},
+      (err, isHost) => {
+      if (err) return console.log('Failed isHost', err)
+
+      console.log('Success isHost', isHost)
+      res.render('event_dish_new', {
+        'isHost':isHost,
+        'eventId': eventId,
+        'dishes': dishes
+}) }) }) })
 
 // Go to the 'Invite a Guest to an Event' page
 router.get('/:id/guest/new', (req, res) => {
@@ -53,8 +60,8 @@ router.get('/:id/guest/new', (req, res) => {
 // Show Event page
 router.get('/:id/show', (req, res) => {
   var eventId = req.params.id
-  var pageViewer = req.session.passport.user
-  console.log('### GET /event/:id/show', 'UserId Viewing this page:', pageViewer, 'EventId:', eventId)
+  var userId = req.session.passport.user
+  console.log('### GET /event/:id/show', 'UserId Viewing this page:', userId, 'EventId:', eventId)
 
   Event.getEventById(eventId,
     (err, event) => {
@@ -70,15 +77,22 @@ router.get('/:id/show', (req, res) => {
         (err, guests) => {
         if (err) return console.log('Failed getGuestsByEventId', err)
 
-        console.log('Success getGuestsByEventId', guests)
-        res.render('event_show', {
-          'eventId': eventId,
-          "pageViewer": pageViewer,
-          "event": event,
-          "dishes": dishes,
-          "guests": guests
-}) }) }) }) })
+        Host.isHost({
+          'userId': userId,
+          'eventId': eventId
+          },
+          (err, isHost) => {
+          if (err) return console.log('Failed isHost', err)
 
+          console.log('Success isHost', isHost)
+          res.render('event_show', {
+            'isHost': isHost,
+            'eventId': eventId,
+            "userId": userId,
+            "event": event,
+            "dishes": dishes,
+            "guests": guests
+}) }) }) }) }) })
 
 // Go to Edit Event page
 router.get('/:id/edit', (req, res) => {
