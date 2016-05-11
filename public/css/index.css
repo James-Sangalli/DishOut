@@ -21,6 +21,8 @@ body {
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
+
+
 html {
     width: 100%;
     height: 100%;
@@ -43,7 +45,6 @@ h6 {
 font-size: 10em;
 font-family: 'Pacifico', cursive;
 text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-
 }
 
 p {
@@ -382,4 +383,9 @@ img::selection {
 
 img::-moz-selection {
     background: 0 0;
+}
+
+i.icon-chevron-up,
+i.icon-chevron-down {
+  color: black;
 }
