@@ -4,42 +4,88 @@ block content
   body#page-top(data-spy='scroll')
   include nav
   .container
+  
+    //- EVENT INFO ROW
     .row
       .col-md-8.col-md-offset-2
+      
         h1 My Dashboard
-        .userDetails
-          p
-            .name
-              name Name: #{user.name}
-            .email
-              email Email: #{user.email}
-            form(method="get" action="/user/edit")
-              button.btn.btn-default(type='submit') Edit Your Details
+        
+        .panel.panel-default
+          .panel-heading Your Information
+          ul.list-group
+            li.list-group-item Name: #{user.name}
+            li.list-group-item Email: #{user.email}
+            
+        form(method="get" action="/user/edit")
+          button.btn.btn-default(type='submit') Edit Your Details
         br      
         h3 Creating an Event      
         .createEvent
           form(method="get" action="/event/new")
               button.btn.btn-default(type='submit') Create Event
+              
+        br
+        br
 
-        br
-        .eventsHosting
-          h3 Events you are Hosting:
-        if hosting.length
-          each event in hosting
-            .event
-              a(href='/event/' + event.id) #{event.name} #{event.date} #{event.time}
-        else
-          .noEvents
-            p You're not hosting any events
-            
-        br
-        .eventsGuesting
-          .subtitle
-            h3 Events you are Invited to:
-          if attending.length
-            each event in attending
-              .event
-                a(href='/event/' + event.id) #{event.name} #{event.date} #{event.time}
-          else
-            .noEvents
-              p You're not invited to any events
+    //- HOSTING ROW
+    .row
+      .col-md-8.col-md-offset-2
+      
+        .panel.panel-default
+          .panel-heading Events I'm Hosting
+          table.table.table-hover
+            thead
+              tr
+                th Name
+                th Date
+                th Time
+                th Location
+            tbody
+              if hosting.length
+                each event in hosting 
+                  tr 
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.name}
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.date}
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.time}
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.location}
+              else          
+                tr
+                  td You're not hosting any events
+      
+      
+    //- INVITES ROW      
+    .row
+      .col-md-8.col-md-offset-2
+        
+        .panel.panel-default
+          .panel-heading Events I'm Invited To
+          table.table.table-hover
+            thead
+              tr
+                th Name
+                th Date
+                th Time
+                th Location
+            tbody
+              if attending.length
+                each event in attending 
+                  tr
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.name}
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.date}
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.time}
+                    td
+                      a(href='/event/' + event.id + '/show') #{event.location}
+              else          
+                tr
+                  td You're not attending any events
+        
+        
+        

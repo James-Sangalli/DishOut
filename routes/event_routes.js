@@ -20,10 +20,10 @@ router.get('/new', (req, res) => {
 // Go to the 'Add dish to an Event' page
 router.get('/:id/dish/new', (req, res) => {
   // TODO
-  // var userId = req.session.passport.user
-  var userId = 4
-  // var eventId = req.params.eventId
-  var eventId = 4
+  var userId = req.session.passport.user
+  // var userId = 4
+  var eventId = req.params.eventId
+  // var eventId = 4
   console.log('### GET /event/:id/dish/new', 'UserId', userId)
 
   Dish.getDishesByEventId(eventId,
@@ -43,10 +43,10 @@ router.get('/:id/dish/new', (req, res) => {
 // Go to the 'Invite a Guest to an Event' page
 router.get('/:id/guest/new', (req, res) => {
   // TODO
-  // var userId = req.session.passport.user
-  var userId = 4
-  // var eventId = req.params.eventId
-  var eventId = 4
+  var userId = req.session.passport.user
+  // var userId = 4
+  var eventId = req.params.eventId
+  // var eventId = 4
   console.log('### GET /event/:id/guest/new', 'EventId', eventId)
 
   Guest.getGuestsByEventId(eventId,
@@ -66,11 +66,12 @@ router.get('/:id/guest/new', (req, res) => {
 // Show Event page
 router.get('/:id/show', (req, res) => {
   // TODO
-  // var eventId = req.params.eventId
-  var eventId = 2
-  // var userId = req.session.passport.user
-  var pageViewer = 4
-  console.log('### GET /event/:id/show', 'UserId Viewing this page:', pageViewer)
+  var eventId = req.params.id
+  // var eventId = 2
+  console.log(req.session.passport)
+  var pageViewer = req.session.passport.user
+  // var pageViewer = 4
+  console.log('### GET /event/:id/show', 'UserId Viewing this page:', pageViewer, 'EventId:', eventId)
 
   Event.getEventById(eventId,
     (err, event) => {
@@ -93,6 +94,14 @@ router.get('/:id/show', (req, res) => {
           return
         }
         console.log('Success getGuestsByEventId', guests)
+
+        console.log('James ONLY test for event & eventId', {
+          "pageViewer": pageViewer,
+          "event": event,
+          "dishes": dishes,
+          "guests": guests
+        })
+
         res.render('event_show', {
           "pageViewer": pageViewer,
           "event": event,
@@ -112,10 +121,10 @@ router.get('/:id/show', (req, res) => {
 // Creating event
 router.post('/create', (req, res) => {
   // TODO
-  // var eventId = req.params.id
-  var eventId = 2
-  // var userId = req.session.passport.user
-  var userId = 4
+  var eventId = req.params.id
+  // var eventId = 2
+  var userId = req.session.passport.user
+  // var userId = 4
   console.log('### POST /event/create', 'EventId', eventId)
 
   Event.createEvent({
@@ -123,7 +132,8 @@ router.post('/create', (req, res) => {
       "date": req.body.date,
       "time": req.body.time,
       "description": req.body.description,
-      "location": req.body.location
+      "location": req.body.location,
+      "bitcoinAddress":req.body.bitcoinAddress
     },
     (err, eventId) => {
       if (err) {
@@ -150,10 +160,10 @@ router.post('/create', (req, res) => {
 
 router.post('/:id/dish/create', (req, res) => {
   // TODO
-  // var eventId = req.params.id
-  var eventId = 2
-  // var userId = req.session.passport.user
-  var userId = 4
+  var eventId = req.params.id
+  // var eventId = 2
+  var userId = req.session.passport.user
+  // var userId = 4
   console.log('### POST /event/:id/dish/create', 'EventId', eventId)
 
   // TODO
@@ -180,10 +190,10 @@ router.post('/:id/dish/create', (req, res) => {
 
 router.post('/:id/guest/create', (req, res) => {
   // TODO
-  // var eventId = req.params.id
-  var eventId = 2
-  // var userId = req.session.passport.user
-  var userId = 4
+  var eventId = req.params.id
+  // var eventId = 2
+  var userId = req.session.passport.user
+  // var userId = 4
   console.log('### POST /event/:id/guest/create', 'EventId', eventId)
 
   var query = {}
@@ -223,14 +233,14 @@ router.post('/:id/guest/create', (req, res) => {
 
 router.post('/:id/edit', (req, res) => {
   // TODO
-  // var eventId = req.params.id
-  var eventId = 2
+  var eventId = req.params.id
+  // var eventId = 2
   console.log('### POST /event/:id/edit', 'EventId', eventId)
 
   // TODO
   // update the event (its name, location etc)
 
-  res.redirect('/event/' + eventId + '/show')
+  res.redirect('/event/' + eventId)
 })
 
 module.exports = router
