@@ -43,8 +43,11 @@ router.get('/:id/dish/new', (req, res) => {
 
 // Go to the 'Invite a Guest to an Event' page
 router.get('/:id/guest/new', (req, res) => {
-  var userId = req.session.passport.user
-  var eventId = req.params.id
+  // var userId = req.session.passport.user
+  // var eventId = req.params.id
+  var userId = 1
+  var eventId = 1
+
   console.log('### GET /event/:id/guest/new', 'EventId', eventId)
 
   Guest.getGuestsByEventId(eventId,
@@ -159,8 +162,9 @@ router.post('/:id/dish/create', (req, res) => {
 
 
 router.post('/:id/guest/create', (req, res) => {
-  var eventId = req.params.id
-  var userId = req.session.passport.user
+  // var eventId = req.params.id
+  var eventId = 1
+
   console.log('### POST /event/:id/guest/create', 'EventId', eventId)
   console.log("req.body ", req.body)
   var userSearch = req.body.userSearch.toLowerCase().trim()
@@ -186,10 +190,10 @@ router.post('/:id/guest/create', (req, res) => {
         },
         (err, guestId) => {
           if (err) return console.log('Failed createGuest', err)
-
           console.log("Successful createGuest", guestId)
           res.redirect('/event/' + eventId + '/guest/new')
 }) }) })
+
 
 /***************************************
 **********   UPDATE   *******************
