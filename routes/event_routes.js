@@ -45,7 +45,6 @@ router.get('/:id/dish/new', (req, res) => {
 router.get('/:id/guest/new', (req, res) => {
   var userId = req.session.passport.user
   var eventId = req.params.id
-
   console.log('### GET /event/:id/guest/new', 'EventId', eventId)
 
   Guest.getGuestsByEventId(eventId,
@@ -161,9 +160,8 @@ router.post('/:id/dish/create', (req, res) => {
 
 router.post('/:id/guest/create', (req, res) => {
   var eventId = req.params.id
-
   console.log('### POST /event/:id/guest/create', 'EventId', eventId)
-  console.log("req.body ", req.body)
+
   var userSearch = req.body.userSearch.toLowerCase().trim()
 
   var query = {}
@@ -173,8 +171,6 @@ router.post('/:id/guest/create', (req, res) => {
   } else {
     query.name = userSearch
   }
-
-  console.log("query ",query)
 
   User.getUserByEmailOrName(query,
     (err, user) => {
